@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <servlet>
+    <servlet-name>aaa</servlet-name>
+    <servlet-class>sec01.ex01.FirstServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>bbb</servlet-name>
+    <servlet-class>sec01.ex01.SecondServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>aaa</servlet-name> <!-- 매핑 이름으로 요청 시 값이 같은 <servlet> 태그안의 <servlet-name>태그와 연결된다. -->
+    <url-pattern>/first</url-pattern> <!-- 브라우저에서 요청하는 논리적인 서블릿 이름 -->
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>bbb</servlet-name>
+    <url-pattern>/second</url-pattern>
+  </servlet-mapping>
+</web-app>
