@@ -17,10 +17,10 @@
    <c:set var="price" value="100000000" />
    <fmt:formatNumber  value="${price}" type="number" var="priceNumber" />
     통화로 표현 시 :
-      <fmt:formatNumber type="currency" currencySymbol="￦"   value="${price}" groupingUsed="true"/><br>
+      <fmt:formatNumber type="currency" currencySymbol="￦"   value="${price}" groupingUsed="true"/><br> <%-- 숫자를 원화로 표현하고, 세자리마다 콤마표시 --%>
     퍼센트로 표현 시 : 
-      <fmt:formatNumber value="${price}" type="percent"   groupingUsed="false" /><br>
-    일반 숫자로 표현 시 : ${priceNumber}<br>
+      <fmt:formatNumber value="${price}" type="percent"   groupingUsed="false" /><br> <%-- groupingUsed가 false이므로 세자리 마다 콤파가 표시되지 않는다. --%>
+    일반 숫자로 표현 시 : ${priceNumber}<br> <%-- <fmt:formatNumber> 태그에서 var 속성에 정한 변수 이름으로 표현 언어에서 출력 --%>
     
      <h2>formatDate 예제</h2> 
      <c:set  var="now" value="<%=new Date() %>" />
@@ -29,7 +29,7 @@
      <fmt:formatDate  value="${now }" type="time" /><br>
      <fmt:formatDate value="${now }" type="both" dateStyle="full"
        timeStyle="full"  /><br>
-     <fmt:formatDate  value="${now }" pattern="YYYY-MM-dd :hh:mm:ss" /><br>
+     <fmt:formatDate  value="${now }" pattern="YYYY-MM-dd :hh:mm:ss" /><br> <%-- <fmt:formatDate> 태그의 pattern 속성에 출력한 날짜 포맷을 지정 --%>
      
       <br><br>
       한국 현재 시간:

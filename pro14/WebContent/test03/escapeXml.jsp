@@ -16,8 +16,8 @@
 <h2>escapeXml 변환하기</h2>
 <h2>
 <pre>
-  <c:out  value="&lt;" escapeXml="true" />
-  <c:out  value="&lt;" escapeXml="false" />
+  <c:out  value="&lt;" escapeXml="true" /> <%-- escapeXml 속성이 true 이므로 value의 &lt는 그대로 화면에 출력 --%>
+  <c:out  value="&lt;" escapeXml="false" /> <%-- escapeXml 속성이 false 이므로 value의 &lt는 해당하는 특수 문자로 변환되어 화면에 출력 --%>
  
   <c:out  value="&gt;" escapeXml="true" />
   <c:out  value="&gt;" escapeXml="false" />

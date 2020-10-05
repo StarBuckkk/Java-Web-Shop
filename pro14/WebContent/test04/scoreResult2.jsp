@@ -14,9 +14,9 @@ pageEncoding="UTF-8"
 <body>
 <c:set var="score" value="${param.score }" />
 <h1>시험점수  <c:out  value="${score }" /></h1><br>
-<c:choose>
+<c:choose> <%-- <c:choose> 태그를 이용해 시험 점수의 유효성을 체크 --%>
    <c:when test="${score>=0 && score<=100 }">
-      <c:choose>
+      <c:choose> <%-- 정상적인 점수이면 학점으로 변환 --%>
          <c:when test="${score>=90 && score<100 }">
              <h1>A학점입니다.</h1>
          </c:when>    
@@ -34,7 +34,7 @@ pageEncoding="UTF-8"
          </c:otherwise>    
       </c:choose>
    </c:when>
-   <c:otherwise>
+   <c:otherwise> <%-- 시험점수가 범위를 벗어나면 입력창으로 다시 이동 --%>
      <h1>점수를 잘못 입력했습니다. 다시입력하세요</h1>
       <a href="scoreTest.jsp">점수 입력 창으로 이동</a>
    </c:otherwise>		

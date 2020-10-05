@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    import="java.util.*,conDB.ex01_Statement.*" pageEncoding="UTF-8" 
+    import="java.util.*, sec01.ex01.*" pageEncoding="UTF-8" 
     isELIgnored="false"  %>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>    
-<jsp:useBean  id="m1" class="sec01.Statement.MemberBean"/>
+<jsp:useBean  id="m1" class="sec01.ex01.MemberBean"/>
 <jsp:setProperty name="m1" property="*"  />
-<jsp:useBean  id="membersList" class="java.util.ArrayList" />
+<jsp:useBean  id="membersList" class="java.util.ArrayList" /> <!-- memberList로 ArrayList 객체 생성 -->
 <%	
    MemberBean m2 = new MemberBean("son", "1234", "손흥민", "son@test.com");
    membersList.add(m1);
@@ -26,13 +26,13 @@
       <td width="20%"><b>이메일</b></td>
 </tr>
   <tr align="center">
-      <td>${membersList[0].id}</td>
+      <td>${membersList[0].id}</td> <!-- 인덱스가 0이므로 첫 번째 회원 정보를 출력 -->
       <td>${membersList[0].pwd}</td>
       <td>${membersList[0].name}</td>
       <td>${membersList[0].email}</td>
   </tr>
   <tr align="center">
-      <td>${membersList[1].id}</td>
+      <td>${membersList[1].id}</td> <!-- 인덱스가 1이므로 첫 번째 회원 정보를 출력 -->
       <td>${membersList[1].pwd}</td>
       <td>${membersList[1].name}</td>
       <td>${membersList[1].email}</td>

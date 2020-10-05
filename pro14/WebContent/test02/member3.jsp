@@ -18,13 +18,13 @@
       <td width="20%"><b>이메일</b></td>
 </tr>
   <tr align="center">
-      <td>${membersList[0].id}</td>
+      <td>${membersList[0].id}</td> <!-- 표현 언어에서 속성 이름으로 ArrayList에 접근한 후 인덱스를 이용해 첫 번 째 회원정보를 출력  -->
       <td>${membersList[0].pwd}</td>
       <td>${membersList[0].name}</td>
       <td>${membersList[0].email}</td>
   </tr>
   <tr align="center">
-      <td>${membersList[1].id}</td>
+      <td>${membersList[1].id}</td> 
       <td>${membersList[1].pwd}</td>
       <td>${membersList[1].name}</td>
       <td>${membersList[1].email}</td>

@@ -12,7 +12,7 @@
 <c:set  var="age"  value="${22}"  scope="page" />
 <c:set  var="height"  value="${177}"  scope="page" />
 
-<c:remove var="age"  />
+<c:remove var="age"  /> <%-- 변수 age와 height를 삭제 -> null 값 --%>
 <c:remove var="height"  />
 <html>
 <head>

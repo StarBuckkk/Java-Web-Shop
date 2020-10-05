@@ -23,13 +23,13 @@
       <td width="20%"><b>이메일</b></td>
    </tr>
    <tr align="center">
-      <td><%=id %> </td>
+      <td><%=id %> </td> <!-- 표현식으로 회원 정보를 출력  -->
       <td><%=pwd%> </td>
       <td><%=name %> </td>
       <td><%=email %> </td>
    </tr>   
    <tr align="center">
-      <td>${id} </td>
+      <td>${id} </td> <!-- 자바 코드 없이 바로 바인딩된 속성이름으로 회원 정보를 출력-->
       <td>${pwd} </td>
       <td>${name} </td>
       <td>${email}</td>

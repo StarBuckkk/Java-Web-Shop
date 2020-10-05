@@ -15,7 +15,7 @@
       <td width="20%"><b>이메일</b></td>
    </tr>
    <tr align="center">
-      <td>${member.id} </td>
+      <td>${member.id} </td> <!-- 바인딩 시 속성 이름으로 각각의 MemberBean 속성에 접근하여 회원 정보를 출력  -->
       <td>${member.pwd} </td>
       <td>${member.name} </td>
       <td>${member.email}</td>

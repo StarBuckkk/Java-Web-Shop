@@ -22,16 +22,16 @@
 	title2="쇼핑몰 중심 JSP 입니다.!"<br>
 	str1="중심"<br><br>
 	
-	fn:length(title1)=${fn:length(title1) } <br>
-	fn:toUpperCase(title1)=${fn:toUpperCase(title1)}<br>
-	fn:toLowerCase(title1)=${fn:toLowerCase(title1)}<br><br>
+	fn:length(title1)=${fn:length(title1) } <br> <%-- 문자열 길이를 반환 --%>
+	fn:toUpperCase(title1)=${fn:toUpperCase(title1)}<br> <%-- 문자열을 대소문자로 변환 --%>
+	fn:toLowerCase(title1)=${fn:toLowerCase(title1)}<br><br> <%-- 문자열을 소문자로 변환 --%>
 	
-	fn:substring(title1,3,6)=${fn:substring(title1,3,6)}<br>
+	fn:substring(title1,3,6)=${fn:substring(title1,3,6)}<br> <%-- 문자열에서 4 ~ 5번째 문자열을 반환 --%>
 	fn:trim(title1)=${fn:trim(title1)}<br>
-	fn:replace(title1," ","/")=${fn:replace(title1," ","/")}<br><br>
+	fn:replace(title1," ","/")=${fn:replace(title1," ","/")}<br><br> <%-- 문자열에서 공백을 /로 대체 --%>
 	
-	fn:indexOf(title2,str1)=${fn:indexOf(title2,str1) }<br>
-	fn:contains(title1,str1)=${fn:contains(title1,str1) }<br>
-	fn:contains(title2,str1)=${fn:contains(title2,str1) }<br>
+	fn:indexOf(title2,str1)=${fn:indexOf(title2,str1) }<br> <%-- title 문자열에서 str1의 위치를 구함 --%>
+	fn:contains(title1,str1)=${fn:contains(title1,str1) }<br> <%-- title1 문자열에 str1 문자열이 있는지 판별 --%>
+	fn:contains(title2,str1)=${fn:contains(title2,str1) }<br> <%-- 첫 번째 문자열이 두 번째 문자열을 포함하는지 판별 --%>
 </body>
 </html>

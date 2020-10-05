@@ -8,7 +8,7 @@ public class MemberBean {
 	private String name;
 	private String email;
 	private Date joinDate;
-	private Address addr;
+	private Address addr; // 주소 정보를 저장하는 Address 클래스 타입 속성을 선언
 	
 	
 	public MemberBean() {

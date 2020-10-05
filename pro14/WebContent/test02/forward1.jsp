@@ -14,5 +14,5 @@
 <title>forward1</title>
 </head>
 <body>
-   <jsp:forward page="member1.jsp" />
+   <jsp:forward page="member1.jsp" /> <!-- member1.jsp로 포워딩 -->
 </html>

@@ -1,7 +1,7 @@
 package sec01.ex02;
 
 public class Address {
-	private String city;
+	private String city; // 회원의 거주 도시와 우편번호를 저장
 	private String zipcode;
 	
 	public Address() {

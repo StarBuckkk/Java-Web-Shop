@@ -4,8 +4,8 @@
 <%
   request.setCharacterEncoding("UTF-8");
 %>    
-<jsp:useBean  id="m" class="sec01.Statement.MemberBean" />
-<jsp:setProperty  name="m" property="*" />
+<jsp:useBean  id="m" class="sec01.ex01.MemberBean" /> <!-- 회원 정보를 저장할 빈을 생성 -->
+<jsp:setProperty  name="m" property="*" /> <!-- 전송된 회원 정보를 빈의 속성에 설정 -->
 
 <meta  charset=”UTF-8">
 <html>
@@ -22,13 +22,13 @@
      </tr>
      </tr>
      <tr align="center">
-       <td><%=m.getId() %> </td>
+       <td><%=m.getId() %> </td> <!-- 표현식을 이용해 회원 정보를 출력 -->
        <td><%=m.getPwd() %></td>
        <td><%=m.getName() %></td>
        <td><%=m.getEmail() %></td>
 </tr>
      <tr align="center">
-       <td>${m.id } </td>
+       <td>${m.id } </td> <!-- 빈 id와 속성 이름으로 접근해 외원 정보를 출력 -->
        <td>${m.pwd} </td>
        <td>${m.name }</td>
        <td>${m.email }</td>

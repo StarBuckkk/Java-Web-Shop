@@ -24,7 +24,7 @@
        <td>${pwd } </td>
        <td>${name } </td>
        <td>${email }</td>
-       <td>${address }</td>
+       <td>${address }</td> <!-- request에서 바인딩된 address 값이 출력된다. -->
     </tr>
 </table>
 </html>

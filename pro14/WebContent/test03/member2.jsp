@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    import="java.util.*,conDB.ex01_Statement.*"
+    import="java.util.*, sec01.ex01.*"
     pageEncoding="UTF-8"  isELIgnored="false"  %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
@@ -13,12 +13,12 @@
     membersMap.put("name", "박지성");
     membersMap.put("email", "park2@test.com");
     MemberBean m1 = new MemberBean("son", "1234", "손흥민", "son@test.com");
-MemberBean m2 = new MemberBean("ki", "4321", "기성용", "ki@test.com");
+	MemberBean m2 = new MemberBean("ki", "4321", "기성용", "ki@test.com");
     membersList.add(m1);
     membersList.add(m2); 
     membersMap.put("membersList",  membersList);  
 %>
-<c:set var="membersList" value="${membersMap.membersList}"  />
+<c:set var="membersList" value="${membersMap.membersList}"  /> <%-- <c:set> 태그를 이용해 Hash에 저장된 ArrayList에 접근하기 위해 사용하기 편리한 이름으로 설정 --%>
 
 <html>
 <head>
@@ -40,7 +40,7 @@ MemberBean m2 = new MemberBean("ki", "4321", "기성용", "ki@test.com");
       <td>${membersMap.email }</td> 
 </tr>
     <tr align=”center”>
-      <td>${membersList[0].id}</td>
+      <td>${membersList[0].id}</td> <%-- <c:set> 태그로 설정한 변수 이름으로 접근하여 출력 --%>
       <td>${membersList[0].pwd}</td>
       <td>${membersList[0].name}</td>
       <td>${membersList[0].email}</td>

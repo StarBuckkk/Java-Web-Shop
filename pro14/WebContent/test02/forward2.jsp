@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-     import="conDB.Statement.*"  pageEncoding="UTF-8"%>
+     import="sec01.ex01.*"  pageEncoding="UTF-8"%>
 <%
   request.setCharacterEncoding("utf-8");
   MemberBean member = new MemberBean("lee", "1234", "이순신", "lee@test.com");

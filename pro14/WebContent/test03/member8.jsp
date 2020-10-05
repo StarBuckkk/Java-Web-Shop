@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    import="java.util.*,conDB.ex01_Statement.*"
+    import="java.util.*, sec01.ex01.*"
     pageEncoding="UTF-8" 
     isELIgnored="false"  %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
@@ -13,7 +13,7 @@
    membersList.add(m2);
    membersList.add(m3);
 %>
-<c:set var="membersList" value="<%= membersList%>" />
+<c:set var="membersList" value="<%= membersList%>" /> <%-- 반복문을 수행하면서 memberList에 저장된 MemberBean 객체가 차례대로 member에 할당된다. --%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -22,7 +22,7 @@
 <body>
 <table border="1"  align="center" >
     <tr align="center" bgcolor="lightgreen">
-      <td width="7%"><b>아이디</b></td>
+      <td width="7%"><b>아이디</b></td> <!-- 속성 이름으로 회원 정보를 차례대로 출력 -->
       <td width="7%"><b>비밀번호</b></td>
       <td width="5%" ><b>이름</b></td>
       <td width="5%"><b>이메일</b></td>
