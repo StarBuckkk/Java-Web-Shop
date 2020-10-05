@@ -23,7 +23,7 @@
        <td>${param.pwd} </td>
        <td>${param.name } </td>
        <td>${param.email }</td>
-       <td>${requestScope.address}</td>
+       <td>${requestScope.address}</td> <!-- requestScope를 이용해 바인딩된 주소 정보를 출력 -->
    </tr>
 </table>
 </body>

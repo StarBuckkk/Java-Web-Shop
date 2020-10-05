@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"
     isELIgnored="false" %>
     
-<jsp:useBean  id="m1"  class="sec01.Statement.MemberBean" scope="page"  />
+<jsp:useBean  id="m1"  class="sec01.ex01.MemberBean" scope="page"  />
 <jsp:setProperty  name="m1"  property="name" value="이순신"/>
 <jsp:useBean  id="m2"  class="java.util.ArrayList" scope="page"  />
 
