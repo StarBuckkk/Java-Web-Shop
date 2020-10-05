@@ -22,18 +22,17 @@
       <td width="7%" ><b>가입일</b></td>
    </tr>  
 <c:choose>
-<%--
- ArrayList list =request.getAttribute("membersList");
---%>
-<c:when test="${ membersList==null}" >
+<%-- ArrayList list =request.getAttribute("membersList"); --%>
+  
+<c:when test="${ membersList==null}" > 
    <tr>
     <td colspan=5>
       <b>등록된 회원이 없습니다.</b>
     </td>  
   </tr>
 </c:when>  
-<c:when test="${membersList!= null}" >
-  <c:forEach  var="mem" items="${membersList }" >
+<c:when test="${membersList!= null}" > <%-- 표현 언어에서 바인딩된 속성 이름으로 바로 접근 --%>
+  <c:forEach  var="mem" items="${membersList }" > <%-- memberList에 저장된 memberBean을 mem에 차례대로 가져와 속성 이름으로 출력 --%>
    <tr align="center">
      <td>${mem.id }</td>
      <td>${mem.pwd}</td>

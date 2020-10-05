@@ -36,6 +36,7 @@ public class MemberDAO {
 			System.out.println("prepareStatememt: " + query);
 			pstmt = con.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery(); // SQL문으로 회원 정보를 조회
+			
 			while (rs.next()) {
 				String id = rs.getString("id"); // 조회할 레코드의 각 컬럼 값을 받아옴
 				String pwd = rs.getString("pwd");

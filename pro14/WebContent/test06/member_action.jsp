@@ -13,13 +13,13 @@
 <jsp:useBean  id="m" class="sec02.ex01.MemberBean" />
 <jsp:setProperty name="m" property="*"  />
 <%
-   MemberDAO memDAO=new MemberDAO();
-   memDAO.addMember(m);
-   List membersList =memDAO.listMembers();
+   MemberDAO memDAO = new MemberDAO();
+   memDAO.addMember(m); 
+   List membersList = memDAO.listMembers();
    request.setAttribute("membersList", membersList);
-%> 
+%> <%-- 조회한 회원 정보를 request에 바인딩 --%> 
 </head>
 <body>
-<jsp:forward  page="membersList.jsp" />
+<jsp:forward  page="membersList.jsp" /> <%-- 다시 memberList.jsp로 포워딩 --%>
 </body>
 </html>
