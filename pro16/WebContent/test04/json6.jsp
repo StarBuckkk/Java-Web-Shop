@@ -16,11 +16,11 @@
             async:false, 
             url:"${contextPath}/json2",
             success:function (data,textStatus){
-            	var jsonInfo = JSON.parse(data);
+            	var jsonInfo = JSON.parse(data); // 서버에서 전송한 JSON 데이터를 파싱
             	var memberInfo ="회원 정보<br>";
 	        memberInfo += "=======<br>";
 	        for(var i in jsonInfo.members){
-		   memberInfo += "이름: " + jsonInfo.members[i].name+"<br>";
+		   memberInfo += "이름: " + jsonInfo.members[i].name+"<br>"; // 배열 이름 members로 각 배열 요소에 접근한 후 name으로 value를 출력
 		   memberInfo += "나이: " + jsonInfo.members[i].age+"<br>";
 		   memberInfo += "성별: " + jsonInfo.members[i].gender+"<br>";
 		   memberInfo += "별명: " + jsonInfo.members[i].nickname+"<br><br><br>";

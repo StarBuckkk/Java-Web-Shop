@@ -11,7 +11,7 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 <c:choose>
-   <c:when test='${msg=="addMember" }'>
+   <c:when test='${msg=="addMember" }'> <%-- 회원 추가, 수정, 삭제 작업 후 컨트롤러에서 넘긴 msg 값에 따라 작업 결과를 alert 창에 출력함 --%>
       <script>
          window.onload=function(){
             alert("회원을 등록했습니다.");
@@ -79,7 +79,7 @@ request.setCharacterEncoding("UTF-8");
           <td>${mem.name}</td>     
           <td>${mem.email }</td>     
           <td>${mem.joinDate}</td>
-          <td><a href="${contextPath}/member/modMemberForm.do?id=${mem.id }">수정</a></td>
+          <td><a href="${contextPath}/member/modMemberForm.do?id=${mem.id }">수정</a></td> <%-- ID를 전달해 수정과 삭제를 요청  --%>
 		   <td><a href="${contextPath}/member/delMember.do?id=${mem.id }">삭제</a></td>
                
        </tr>
@@ -87,6 +87,6 @@ request.setCharacterEncoding("UTF-8");
 </c:when>
 </c:choose>
    </table>  
- <a href="${contextPath}/member/memberForm.do"><p class="cls2">회원 가입하기</p></a>
+ <a href="${contextPath}/member/memberForm.do"><p class="cls2">회원 가입하기</p></a> <%-- 추가하기 클릭 시 서블릿에 /member/memberForm.do로 요청한다. --%>
 </body>
 </html>

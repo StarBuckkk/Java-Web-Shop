@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	import=" java.util.*,conDB.ex01_Statement.*"
+	import=" java.util.*, sec01.member_list.*"
 	pageEncoding="UTF-8"
 	isELIgnored="false" 
 %>

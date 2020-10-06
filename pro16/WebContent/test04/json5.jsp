@@ -16,7 +16,7 @@
              type:"post",
              async:false, 
              url:"${contextPath}/json",
-             data : {jsonInfo: _jsonInfo},
+             data : {jsonInfo: _jsonInfo}, // 매개변수 이름 jsoninfo로 json 데이터를 ajax로 전송
              success:function (data,textStatus){
 	     },
 	     error:function(data,textStatus){

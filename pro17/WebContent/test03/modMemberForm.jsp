@@ -19,16 +19,16 @@
 </head>
 <body>
  <h1 class="cls1">회원 정보 수정창</h1>
-<form  method="post" action="${contextPath}/member/modMember.do?id=${memInfo.id}">
+<form  method="post" action="${contextPath}/member/modMember.do?id=${memInfo.id}"> <%-- 수정하기 클릭 시 컨트롤러에 /member/modMember.do로 요청 --%>
  <table align="center" >
    <tr>
      <td width="200"><p align="right" >아이디</td>
-     <td width="400"><input   type="text" name="id" value="${memInfo.id}" disabled ></td>
+     <td width="400"><input   type="text" name="id" value="${memInfo.id}" disabled ></td> <%-- 조회한 회원 정보를 텍스트 박스에 표시 --%>
      
    </tr>
  <tr>
      <td width="200"><p align="right" >비밀번호</td>
-     <td width="400"><input   type="password" name="pwd" value="${memInfo.pwd}" >
+     <td width="400"><input   type="password" name="pwd" value="${memInfo.pwd}" > <%-- 조회한 회원 정보를 텍스트 박스에 표시 --%>
      </td>
    </tr>
    <tr>

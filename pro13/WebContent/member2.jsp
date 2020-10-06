@@ -1,11 +1,11 @@
 <%@ page language="java"   contentType="text/html; charset=UTF-8"
-     import="java.util.*, sec01.ex01.*" 
+     import="java.util.*,sec01.Ajax_Basic.*" 
     pageEncoding="UTF-8"%>
 <%
-  request.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
 %>    
 
-<jsp:useBean  id="m"  class="sec01.ex01.MemberBean"  scope="page"/>
+<jsp:useBean  id="m"  class="sec01.Ajax_Basic.MemberBean"  scope="page"/>
 
 <%
    String  id = request.getParameter("id"); // 유즈빈 액션 태그로 id가 m인 MemberBean 객체를 만듬

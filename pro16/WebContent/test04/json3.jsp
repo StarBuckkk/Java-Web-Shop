@@ -11,10 +11,10 @@
      $(function() {
          $("#checkJson").click(function() {
 	        var jsonStr = '{"name":"박지성","age":25,"gender":"남자","nickname":"날센돌이"}';
-	        var jsonObj = JSON.parse(jsonStr);
+	        var jsonObj = JSON.parse(jsonStr); // parse() 메서드로 JSON 데이터를 가져옴
 	      	var output ="회원 정보<br>";
 	      	output += "=======<br>";
-	      	output += "이름: " + jsonObj.name+"<br>";
+	      	output += "이름: " + jsonObj.name+"<br>"; // 문자열에서 JSON 객체의 속성을 가져옵니다.
 	       	output += "나이: " + jsonObj.age+"<br>";
 	      	output += "성별: " + jsonObj.gender+"<br>";
 	      	output += "별명: " + jsonObj.nickname+"<br>"; 

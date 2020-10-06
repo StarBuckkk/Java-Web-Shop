@@ -19,7 +19,7 @@
                var jsonInfo = JSON.parse(data);
              var memberInfo ="회원 정보<br>";
 	     memberInfo += "=======<br>";
-	     for(var i in jsonInfo.members){
+	     for(var i in jsonInfo.members){ // 배열 이름 members로 회원 정보를 출력
 	       memberInfo += "이름: " + jsonInfo.members[i].name+"<br>";
 	       memberInfo += "나이: " + jsonInfo.members[i].age+"<br>";
 	       memberInfo += "성별: " + jsonInfo.members[i].gender+"<br>";
@@ -28,12 +28,12 @@
 	        	
 	     var booksInfo = "<br><br><br>도서 정보<br>";
 	     booksInfo += "===========<br>";
-	     for(var i in jsonInfo.books) {
+	     for(var i in jsonInfo.books) { // 배열이름 book로 도서 정보를 출력
 	        booksInfo += "제목: " + jsonInfo.books[i].title+"<br>";
 	        booksInfo += "저자: " + jsonInfo.books[i].writer+"<br>";
 	        booksInfo += "가격: " + jsonInfo.books[i].price+"원 <br>";
 	        booksInfo += "장르: " + jsonInfo.books[i].genre+"<br>";
-            imageURL = jsonInfo.books[i].image;
+            imageURL = jsonInfo.books[i].image; // 이미지 URL을 구해 <img> 태그의 src 속성에 설정
             booksInfo += "<img src="+imageURL+" />"+"<br><br><br>";
 	     }
 	     $("#output").html(memberInfo+"<br>"+booksInfo);

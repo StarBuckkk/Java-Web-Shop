@@ -7,18 +7,18 @@
   <script type="text/javascript">
       function fn_process(){
        $.ajax({
-         type:"get",
-         dataType:"text",
-         async:false,  
-         url:"http://localhost:8090/pro16/ajaxTest1",
-         data: {param:"Hello,jquery"},
-         success:function (data,textStatus){
+         type:"get", // 통신 타입 : post or get 방식
+         dataType:"text", // 응답 받을 데이터 타입
+         async:false, // false일 경우 비동기식으로 처리
+         url:"http://localhost:8090/pro16_HTML5_JQuery/ajaxTest1", // 요청할 url 설정
+         data: {param:"Hello,jquery"}, // 서버에 요청할  때 보낼 매개변수 설정
+         success:function (data,textStatus){ // 요청 및 응답에 성공했을 대 처리 구문 설정
             $('#message').append(data);
          },
-         error:function(data,textStatus){
+         error:function(data,textStatus){ // 요청 및 응답에 실패했을 때 처리 구문 설정
             alert("에러가 발생했습니다.");ㅣ
          },
-         complete:function(data,textStatus){
+         complete:function(data,textStatus){ // 모든 작업을 마친 후 처리 구문을 설정
             alert("작업을완료 했습니다");
          }
       });	

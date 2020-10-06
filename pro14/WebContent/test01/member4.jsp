@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    import="java.util.*, sec01.ex01.*" pageEncoding="UTF-8" 
+    import="java.util.*,sec01.Ajax_Basic.*" pageEncoding="UTF-8" 
     isELIgnored="false"  %>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>    
-<jsp:useBean  id="m1" class="sec01.ex01.MemberBean"/>
+<jsp:useBean  id="m1" class="sec01.Ajax_Basic.MemberBean"/>
 <jsp:setProperty name="m1" property="*"  />
 <jsp:useBean  id="membersList" class="java.util.ArrayList" /> <!-- memberList로 ArrayList 객체 생성 -->
 <%	

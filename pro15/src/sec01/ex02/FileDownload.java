@@ -37,23 +37,28 @@ public class FileDownload extends HttpServlet {
 	private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
+		
 		String file_repo = "C:\\file_repo";
-		String fileName = (String) request.getParameter("fileName");
+		String fileName = (String) request.getParameter("fileName"); // 매개변수로 전송된 파일 이름을 읽어옴
 		System.out.println("fileName=" + fileName);
-		OutputStream out = response.getOutputStream();
+		OutputStream out = response.getOutputStream(); // response에서 OutStream 객체를 가져옴
 		String downFile = file_repo + "\\" + fileName;
 		File f = new File(downFile);
-		response.setHeader("Cache-Control", "no-cache");
+		
+		response.setHeader("Cache-Control", "no-cache"); // 브라우저한테 헤더정보를 보낼설정 / 캐시를 사용하지 말고 바로보내기
 		response.addHeader("Content-disposition", "attachment; fileName=" + fileName);
 		FileInputStream in = new FileInputStream(f);
-		byte[] buffer = new byte[1024 * 8];
+		
+		byte[] buffer = new byte[1024 * 8]; // 버퍼 기능을 이용해 파일에서 버퍼로 데이터를 읽어와 한꺼번에 출력
+		
 		while (true) {
 			int count = in.read(buffer);
 			if (count == -1)
 				break;
 			out.write(buffer, 0, count);
 		}
-		in.close();
+		
+		in.close(); // 먼저 연 순서대로 닫기
 		out.close();
 	}
 

@@ -6,7 +6,7 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript"> 
  function addHtml(){
-	 $("#article").html('안녕하세요'+'<br>');
+	 $("#article").html('안녕하세요'+'<br>'); // 제이쿼리로 id가 article인 태그를 찾아서 html() 메서드의 인자 값을 태그에 설정
 	 
  }
 </script>
@@ -15,7 +15,7 @@
   <div>
      <p id="article"></p>
   </div>
-  <input type="button" value="추가하기"  onClick="addHtml()"  />
+  <input type="button" value="추가하기"  onClick="addHtml()"  /> <!-- 버튼 클릭 시 addHtml() 함수를 호출 -->
 </body>
 </html>
 
