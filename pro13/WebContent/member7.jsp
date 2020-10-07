@@ -1,9 +1,9 @@
 <%@ page language="java"  contentType="text/html; charset=UTF-8"
-      import="java.util.*,conDB.Statement.*" pageEncoding="UTF-8"%>
+      import="java.util.*,sec01.Ajax_Basic.*" pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-<jsp:useBean  id="m"  class="sec01.Statement.MemberBean"  scope="page"/>
+<jsp:useBean  id="m"  class="sec01.Ajax_Basic.MemberBean"  scope="page"/>
 <jsp:setProperty name="m" property="*" />
 <!DOCTYPE html>
 <html>

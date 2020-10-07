@@ -4,9 +4,9 @@
 <%
   request.setCharacterEncoding("UTF-8");
 %>    
-<jsp:useBean  id="m" class="sec01.ex02.MemberBean" />
+<jsp:useBean  id="m" class="sec01.ex01.ex02.MemberBean" />
 <jsp:setProperty  name="m" property="*" />
-<jsp:useBean   id="addr" class="sec01.ex02.Address"/>
+<jsp:useBean   id="addr" class="sec01.ex01.ex02.Address"/>
 <jsp:setProperty   name="addr" property="city" value="서울"/> <!-- Address 빈을 생성한 후 도시(city)와 우편번호(zipcode)를 설정 -->
 <jsp:setProperty   name="addr" property="zipcode" value="07654"/>
 <%

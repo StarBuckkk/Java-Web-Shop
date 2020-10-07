@@ -4,7 +4,7 @@
 <%
   request.setCharacterEncoding("UTF-8");
 %>    
-<jsp:useBean  id="m" class="sec01.Ajax_Basic.MemberBean" /> <!-- 회원 정보를 저장할 빈을 생성 -->
+<jsp:useBean  id="m" class="sec01.ex01.ex01.MemberBean" /> <!-- 회원 정보를 저장할 빈을 생성 -->
 <jsp:setProperty  name="m" property="*" /> <!-- 전송된 회원 정보를 빈의 속성에 설정 -->
 
 <meta  charset=”UTF-8">

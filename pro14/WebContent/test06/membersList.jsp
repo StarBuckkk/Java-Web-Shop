@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-     import="java.util.*,sec02_member_AddUpdateDelete.ID_overlap.*"
+     import="java.util.*,sec02_CRUD.Add.*"
     pageEncoding="UTF-8"
     isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    

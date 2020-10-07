@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    import="java.util.*,sec01.Ajax_Basic.*"
+    import="java.util.*,sec01_List.*"
     pageEncoding="UTF-8" 
     isELIgnored="false"  %>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>    
-<jsp:useBean  id="m1" class="sec01.Ajax_Basic.MemberBean"/>
+<jsp:useBean  id="m1" class="sec01.ex01.MemberBean"/>
 <jsp:setProperty name="m1" property="*"  />
 <jsp:useBean  id="membersList" class="java.util.ArrayList" />
 <jsp:useBean  id="membersMap" class="java.util.HashMap" /> <!-- 회원 정보를 저장할 HashMap 객체를 <useBean> 액션 태그를 이용해 생성 -->
