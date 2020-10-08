@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="pro22">
+        
+    <wb-module deploy-name="pro22_Spring_JDBC">
+                
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="pro22"/>
-        <property name="java-output-path" value="/pro22/build/classes"/>
+                
+        <property name="java-output-path" value="/pro22_Spring_JDBC/build/classes"/>
+        <property name="context-root" value="pro22_Spring_JDBC"/>
+            
     </wb-module>
+    
 </project-modules>
