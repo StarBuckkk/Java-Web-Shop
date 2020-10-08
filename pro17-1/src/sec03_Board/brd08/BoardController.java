@@ -29,7 +29,7 @@ import org.apache.commons.io.FileUtils;
 @WebServlet("/board/*")
 public class BoardController extends HttpServlet {
 	private static String ARTICLE_IMAGE_REPO = "C:\\board\\article_image"; // 글에 첨부한 이미지 저장 위치를 상수로 선언
-	BoardService boardService;
+	BoardService boardService;  // BoardService 객체를 코드에서 직접 생성해 사용
 	ArticleVO articleVO;
 
 	/**

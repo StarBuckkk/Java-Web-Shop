@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
                              "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<!-- setter를 이용한 DI -->
 <beans>
-	<bean id="memberService" class="com.spring.ex03.MemberServiceImpl">
-	   <property name="memberDAO" ref="memberDAO" />
-	</bean>
+	<bean id="memberService" class="com.spring.ex03.MemberServiceImpl"> <!-- <bean> 태그를 이용해 MemberServiceImpl 객체(빈)를 생성한 후 빈 id를 이용해 접근 -->
+	   <property name="memberDAO" ref="memberDAO" /> <!-- 주입되는 데이터가 기본형이 아닌 참조형인 경우 반드시 ref 속성으로 설정 -->
+	</bean> <!-- MemberServiceImpl 클래스를 이용해 id가  memberService인 빈은 만듬. 빈을 만들면서 setter 주입 방식으로 id가 memberDAO인 빈을 자신의 속성에 주입-->
+	
 	<bean id="memberDAO" class="com.spring.ex03.MemberDAOImpl" />
 </beans>

@@ -22,8 +22,8 @@ public class BoardDAO {
 	public BoardDAO() {
 		try {
 			Context ctx = new InitialContext();
-			Context envContext = (Context) ctx.lookup("java:/comp/env");
-			dataFactory = (DataSource) envContext.lookup("jdbc/oracle");
+			Context envContext = (Context) ctx.lookup("java:/comp/env"); // JNDI에 접근하기 위해 기본 경로를 지정
+			dataFactory = (DataSource) envContext.lookup("jdbc/oracle"); // 톰캣 context.xml에 설정한 name값인 jdbc/oracle을 이용해 톰캣이 미리 연결한 DataSource를 받아온다.
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -34,7 +34,7 @@ public class BoardDAO {
 		int section = (Integer)pagingMap.get("section"); // 전송된 section과 pageNum 값을 가져옴
 		int pageNum=(Integer)pagingMap.get("pageNum");
 		try{
-		   conn = dataFactory.getConnection();
+		   conn = dataFactory.getConnection(); // DataSource를 이용해 데이터베이스에 연결
 		   String query ="SELECT * FROM ( " 
 						+ "select ROWNUM  as recNum,"+"LVL," // 계층형으로 조회된 레코드의 ROWNUM(recNum)이 표시되도록 조회
 							+"articleNO,"
@@ -58,7 +58,7 @@ public class BoardDAO {
 		   
 		   System.out.println(query);
 		   pstmt= conn.prepareStatement(query);
-		   pstmt.setInt(1, section);
+		   pstmt.setInt(1, section); // select 문의 각 '?'에 순서대로 회원 정보를 조회 / ?은 1부터 시작
 		   pstmt.setInt(2, pageNum);
 		   pstmt.setInt(3, section);
 		   pstmt.setInt(4, pageNum);
@@ -159,12 +159,12 @@ public class BoardDAO {
 		return 0;
 	}
 
-	public int insertNewArticle(ArticleVO article) {
+	public int insertNewArticle(ArticleVO article) { // PreparedStatement의 insert문은 게시물정보를 저장하기 위해 ?를 사용
 		int articleNO = getNewArticleNO();
 		try {
 			conn = dataFactory.getConnection();
 			
-			int parentNO = article.getParentNO();
+			int parentNO = article.getParentNO(); 
 			String title = article.getTitle();
 			String content = article.getContent();
 			String id = article.getId();
@@ -175,7 +175,7 @@ public class BoardDAO {
 			
 			System.out.println(query);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, articleNO);
+			pstmt.setInt(1, articleNO); // insert문의 각 '?'에 순서대로 회원 정보를 세팅 / ?은 1부터 시작
 			pstmt.setInt(2, parentNO);
 			pstmt.setString(3, title);
 			pstmt.setString(4, content);
@@ -202,7 +202,7 @@ public class BoardDAO {
 			
 			System.out.println(query);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, articleNO);
+			pstmt.setInt(1, articleNO); // 첫번째 '?'에 전달된 articleNO를 인자로 넣음
 			ResultSet rs = pstmt.executeQuery();
 			
 			rs.next();
