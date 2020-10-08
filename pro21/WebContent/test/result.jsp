@@ -20,7 +20,7 @@ isELIgnored="false" %>
       <td>비밀번호</td>
    </tr>
    <tr align="center">
-      <td>${userID}</td>
+      <td>${userID}</td> <!-- 컨트롤러에서 바인딩해 넘어온 회원 정보를 출력 -->
       <td>${passwd}</td>
    </tr>
 </table>

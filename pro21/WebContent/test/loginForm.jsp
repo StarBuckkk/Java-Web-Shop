@@ -15,7 +15,7 @@
 </head>
 
 <body>
-<form name="frmLogin" method="post"  action="${contextPath}/test/login.do">
+<form name="frmLogin" method="post"  action="${contextPath}/test/login.do"> <%-- /test/login.do로 DispatcherServlet에 요청 --%>
    <table border="1"  width="80%" align="center" >
       <tr align="center">
          <td>아이디</td>

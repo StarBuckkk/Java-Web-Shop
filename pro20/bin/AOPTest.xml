@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
    "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<!-- setter를 이용한 DI -->
 <beans>
-   <bean id="calcTarget" class="com.spring.ex01.Calculator" />
-   <bean id="logAdvice" class="com.spring.ex01.LoggingAdvice" />
+   <bean id="calcTarget" class="com.spring.ex01.Calculator" /> <!-- <bean> 태그를 이용해  Calculator 객체(빈)를 생성한 후 빈 id를 이용해 접근 -->
+   <bean id="logAdvice" class="com.spring.ex01.LoggingAdvice" /> <!-- <bean> 태그를 이용해  로그기능을 하는 LoggingAdvice 객체(빈)를 생성한 후 빈 id를 이용해 접근 -->
    
    <bean id="proxyCal"
-          class="org.springframework.aop.framework.ProxyFactoryBean">
-      <property name="target" ref="calcTarget"/>
-      <property name="interceptorNames">
+          class="org.springframework.aop.framework.ProxyFactoryBean"> <!-- <bean> 태그를 이용해  스프링 프레임워크에서 제공하는 ProxyFactoryBean 객체(빈)을 생성한 후 빈 id를 이용해 접근 -->
+      <property name="target" ref="calcTarget"/> <!-- 주입되는 데이터가 기본형이 아닌 참조형인 경우 반드시 ref 속성으로 설정 -->
+      <property name="interceptorNames"> <!-- 스프링의 ProxyFactoryBean의 interceptorNames 속성에 logAdvice를 어드바이스 빈으로 설정하여 타깃 클래스의 메서드 호출 시  logAdvice를 실행-->
          <list>
             <value>logAdvice</value>
          </list>
-      </property>
+      </property> 
    </bean>
 </beans>
