@@ -29,17 +29,19 @@ public class MemberServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		String nextPage = "";
 
-		if (action== null || action.equals("listMembers")) {
+		if (action == null || action.equals("listMembers")) {
 			List<MemberVO> membersList = dao.selectAllMemberList();
 			request.setAttribute("membersList", membersList);
 			nextPage = "test02/listMembers.jsp";
-		} else if (action.equals("selectMemberById")) {
+			
+		} else if (action.equals("selectMemberById")) { // 검색 조건이 selectMemberByid이면 전송된 값을 getParameter()로 가져온 후 SQL문의 조건식에서 id의 조건 값으로 전달
 			String id = request.getParameter("value");
 			memberVO = dao.selectMemberById(id);
 			request.setAttribute("member", memberVO);
 			nextPage = "test02/memberInfo.jsp";
-		} else if (action.equals("selectMemberByPwd")) {
-			int pwd = Integer.parseInt(request.getParameter("value"));
+			
+		} else if (action.equals("selectMemberByPwd")) { // 검색 조건이 selectMemberByid이면 전송된 값을 getParameter()로 가져온 후 SQL문의 조건식에서 pwd의 조건 값으로 전달
+			int pwd = Integer.parseInt(request.getParameter("value") );
 			List<MemberVO> membersList = dao.selectMemberByPwd(pwd);
 			request.setAttribute("membersList", membersList);
 			nextPage = "test02/listMembers.jsp";

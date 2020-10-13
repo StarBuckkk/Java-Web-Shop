@@ -4,12 +4,12 @@
       <listener-class>
          org.springframework.web.context.ContextLoaderListener
      </listener-class>
-   </listener>
+   </listener> <!-- 여러  설정 파일을 읽어 들이기 위해 스프링의 ContextLoaderListener를 설정 -->
 
    <context-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>
-          /WEB-INF/config/action-service.xml
+          /WEB-INF/config/action-service.xml <!-- 어플리케이션 실행 시 ContextLoaderListener로 해당 위치의 설정 파일을 읽어 들임 -->
           /WEB-INF/config/action-dataSource.xml
       </param-value>
    </context-param>

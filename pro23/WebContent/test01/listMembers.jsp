@@ -24,7 +24,7 @@
       <td><b>가입일</b></td>
    </tr>
    
- <c:forEach var="member" items="${membersList}" >     
+ <c:forEach var="member" items="${membersList}" >     <%-- 컨트롤러에서 바인딩한 memberList로 접근 --%>
    <tr align="center">
       <td>${member.id}</td>
       <td>${member.pwd}</td>

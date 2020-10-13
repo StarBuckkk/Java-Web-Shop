@@ -23,8 +23,8 @@ public class MemberServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		MemberDAO dao = new MemberDAO();
-		//String name = dao.selectName();
-		int pwd = dao.selectPwd();
+		//String name = dao.selectName(); // MemberDAO의 selectName() 메서드를 호출
+		int pwd = dao.selectPwd(); // MemberDAO의 selectPwd() 메서드를 호출
 		PrintWriter pw = response.getWriter();
 		pw.write("<script>");
 		//pw.write("alert(' 이름: " + name +"');");

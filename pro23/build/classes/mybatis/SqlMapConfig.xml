@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-config.dtd">
+"http://mybatis.org/dtd/mybatis-3-config.dtd"> <!-- 각 설정 파일은 src 패키지 아래에 위치해야 한다. -->
 
-<configuration>
+<configuration> <!-- src 패키지 아래에 SqlMapConfig.xml은 mybatis 패키지에 위치 -->
    <typeAliases>
-      <typeAlias type="com.spring.ex01.MemberVO" alias="memberVO"/>
+      <typeAlias type="com.spring.ex01.MemberVO" alias="memberVO"/> <!-- typeAliases 태그는 DAO 에서 SQL문으로 값을 전달할 때 또는 SQL문을 실행한 후 가져온 값을 DAO로 전달할 때 사용할 빈을 생성 -->
    </typeAliases>
 
    <environments default="development">
      <environment id="development">
         <transactionManager type="JDBC"/>
-        <dataSource  type="POOLED">
+        <dataSource  type="POOLED"> <!-- 데이터베이스 연결을 설정 -->
             <property name="driver"  value="oracle.jdbc.driver.OracleDriver" />
             <property  name="url"    value="JDBC:oracle:thin:@localhost:1521:XE" />
             <property name="username" value="scott" />
@@ -21,6 +21,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
    </environments>
 
 <mappers>
-   <mapper resource="mybatis/mappers/member.xml"/>
+   <mapper resource="mybatis/mappers/member.xml"/> <!-- mapper 태그를 이용해 회원 기능 관련 SQL문이 있는 member.xml을 읽어 들임. 이때 반드시 지정한 패키지 이름과 일치해야 한다. -->
 </mappers>
 </configuration>

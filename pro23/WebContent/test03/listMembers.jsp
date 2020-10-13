@@ -32,7 +32,8 @@
       <td>${member.name}</td>
       <td>${member.email}</td>
       <td>${member.joinDate}</td>
-      <%-- <td><a href="${contextPath}/mem4.do?action=deleteMember&id=${member.id }">삭제하기</a></td> --%>
+      <td><a href="${contextPath}/mem4.do?action=deleteMember&id=${member.id }">삭제하기</a></td>
+      <%-- 삭제하기 클릭 시 action 값과 회원 id를 서블릿으로 전송 --%>
       
     </tr>
   </c:forEach>   

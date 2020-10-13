@@ -15,7 +15,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 <bean id="viewResolver" 
       class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
       <property  name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-      <property  name="prefix" value="/WEB-INF/views/" />
+      <property  name="prefix" value="/WEB-INF/views/" /> <!-- URL 요청명에 대해/WEB-INF views 폴더의 JSP를 선택 -->
       <property  name="suffix" value=".jsp" />
    </bean>
    <bean id="memberController" 
@@ -30,7 +30,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
    class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver" >
       <property  name="mappings" >
         <props>
-          <prop key="/member/listMembers.do" >listMembers</prop>
+          <prop key="/member/listMembers.do" >listMembers</prop> <!-- URL 요청명에 대해 동일한 이름의 메서드를 호출하도록 설정 -->
           <prop key="/member/addMember.do" >addMember</prop>
           <prop key="/member/memberForm.do" >memberForm</prop>
           <prop key="/member/memberDetail.do">memberDetail</prop>

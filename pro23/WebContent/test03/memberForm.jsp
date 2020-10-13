@@ -19,7 +19,7 @@
 </style>
 </head>
 <body>
-	<form method="post"   action="${contextPath}/mem4.do?action=insertMember2">
+	<form method="post"   action="${contextPath}/mem4.do?action=insertMember2"> <%-- action 값으로 insertMember를 MemberServlet으로 전달 --%>
 	<h1  class="text_center">회원 가입창</h1>
 	<table  align="center">
 	   <tr>

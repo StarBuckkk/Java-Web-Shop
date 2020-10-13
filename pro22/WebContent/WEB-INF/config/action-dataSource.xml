@@ -16,12 +16,12 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
       class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >
       <property name="locations" >
          <list>
-            <value>/WEB-INF/config/jdbc.properties</value>
+            <value>/WEB-INF/config/jdbc.properties</value> <!-- jdbc.properties 파일에서 데이터베이스 연결에 필요한 4가지 설정 정보를 가져옴 -->
          </list>
       </property>
    </bean>
     <bean id="dataSource"
-		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource"> <!-- jdbc.properties 파일의 4가지 설정 정보로 스프링의 SimpleDriverDataSource 빈 생성 시 데이터베이스에 연결 -->
 		<property name="driverClass"
 			value="${jdbc.driverClassName}" />
 		<property name="url" value="${jdbc.url}" />
@@ -30,6 +30,6 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	</bean>
 	
    <bean  id="memberDAO"   class="com.spring.member.dao.MemberDAOImpl" >
-      <property name="dataSource" ref="dataSource"  />
+      <property name="dataSource" ref="dataSource"  /> <!-- 생성된 dataSource 빈을 memberDAO 빈에 주입 -->
    </bean> 
 </beans>

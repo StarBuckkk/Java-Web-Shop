@@ -14,7 +14,7 @@
 <body>
 <h1>회원검색</h1>
 <form action="${contextPath}/mem4.do">
-          <input  type="hidden" name="action" value="searchMember" />
+          <input  type="hidden" name="action" value="searchMember" /> <!-- <hidden> 태그를 이용해 서블릿으로 action 값을 전달 -->
    이름 : <input  type="text" name="name" /><br>
    이메일 : <input  type="text" name="email" /><br>
    <input type="submit" value="검색"  />

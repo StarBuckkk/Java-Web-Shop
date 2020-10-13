@@ -20,7 +20,7 @@
 </style>
 </head>
 <body>
-	<form method="post"   action="${contextPath}/mem4.do?action=updateMember">
+	<form method="post"   action="${contextPath}/mem4.do?action=updateMember"> <%-- updateMember 서블릿에 전달 --%>
 	<h1  class="text_center">회원 정보 수정창</h1>
 	<table  align="center">
 	   <tr>
