@@ -26,7 +26,7 @@
 		<result property="goods_sort" column="goods_sort" />
 		<result property="goods_writer_intro" column="goods_writer_intro" />
 		<result property="goods_intro" column="goods_intro" />
-		<result property="goods_contents_order" column="goods_contents_order" javaType="java.lang.String" jdbcType="CLOB"  />
+		<result property="goods_contents_order" column="goods_contents_order" javaType="java.lang.String" jdbcType="CLOB"  /> <!-- 상품 목차를 저장하는 컬럼의 타입은 대용량 처리가능한 CLOB -->
 	</resultMap>	
 
 	<resultMap id="imageResult" type="ImageFileVO">
@@ -76,10 +76,14 @@
 	<!-- SQL문의 >, <, <=, >= 같은 연산자들은 XML 파일에서 작성하면 연산자가 아닌 특수 문자로 인식하므로 오류 발생 -->
 	<!-- 이러한 연산자들도 SQL문의 일부라는 것을 알려주기 위해 <![CDATA[ ... ]]> 태그로 작성해야 한다. -->
 	
+	<!-- selectkey 태그를 이용하면 주문상품일련번호를 가져오는 SQL문을 따로 실행하지 않아도 된다. -->
+	
 	<insert id="insertNewGoods" parameterType="java.util.Map"   >
+	<!-- 새 상품을 추가하기 전에 시퀀스에서 상품 번호를 먼저 가져옴 -->
 		<selectKey resultType="String" keyProperty="goods_id" order="BEFORE">
 	    	select seq_goods_id.nextval from dual
 	    </selectKey>
+	<!-- 부모 SQL문이 있는 경우 부모 SQL문을 실행하기 전 또는 후에 실행할지의 여부 지정 : AFTER로 지정할 경우 부모 SQL문을 실행한 후 수행 -->
 	    
 	    <![CDATA[
 		   insert into t_shopping_goods(
@@ -127,11 +131,12 @@
 					  			      #{goods_contents_order:VARCHAR}
 					 			 )
 		]]>
-	</insert> 
+	</insert> <!-- CLOB 타입으로 데이터 입력 시 VARCHAR2로 지정 -->
+		
 		<insert id="insertGoodsImageFile" parameterType="imageFileVO"   >
 		<selectKey resultType="int" keyProperty="image_id" order="BEFORE">
 	    	select seq_image_id.nextval from dual
-	    </selectKey>
+	    </selectKey> <!-- 시퀀스에서 상품 이미지 번호를 미리 가져옴 -->
 	    <![CDATA[
 		   insert into t_goods_detail_image (image_id,
 		                                     goods_id,
@@ -144,7 +149,8 @@
 											   								 #{fileType},
 											   								 #{reg_id} )
 		]]>
-	</insert> 
+	</insert> <!-- 새 상품일 경우 첨부한 상품 이미지 정보를 저장 --> 
+	
 	<select id="selectNewGoodsList" resultMap="goodsResult"   parameterType="java.util.Map"  >
 	    <![CDATA[
 		  select * from (

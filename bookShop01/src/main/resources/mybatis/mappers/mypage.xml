@@ -53,7 +53,7 @@
             where member_id=#{member_id}
             order by pay_order_time desc
 		]]>
-	</select>
+	</select> <!-- 주문 내역을 조회 -->
 	
 
 	<select id="selectMyOrderInfo" resultMap="orderGoodsResult"   parameterType="String"  >

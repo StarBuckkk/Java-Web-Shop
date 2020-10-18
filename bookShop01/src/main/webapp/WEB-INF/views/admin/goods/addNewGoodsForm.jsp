@@ -8,12 +8,12 @@
 <meta charset="utf-8">
 <head>
 <script type="text/javascript">
-  var cnt=0;
+  var cnt=0; // 상세 이미지의 첨부 순서를 나타냄
   function fn_addFile(){
 	  if(cnt == 0){
-		  $("#d_file").append("<br>"+"<input  type='file' name='main_image' id='f_main_image' />");	  
+		  $("#d_file").append("<br>"+"<input  type='file' name='main_image' id='f_main_image' />"); // 첫 번째 파일 업로드는 메인 이미지를 첨부하므로 name 속성을 main_image로 설정
 	  }else{
-		  $("#d_file").append("<br>"+"<input  type='file' name='detail_image"+cnt+"' />");
+		  $("#d_file").append("<br>"+"<input  type='file' name='detail_image"+cnt+"' />"); // 그 외의 이미지들은 name 속성의 값을 detail_image+cnt로 설정
 	  }
   	
   	cnt++;
@@ -182,7 +182,7 @@
 					<tr>
 						<td align="right">이미지파일 첨부</td>
 			            
-			            <td  align="left"> <input type="button"  value="파일 추가" onClick="fn_addFile()"/></td>
+			            <td  align="left"> <input type="button"  value="파일 추가" onClick="fn_addFile()"/></td> <!-- 파일추가 클릭 시 파일 업로드가 동적으로 추가됨 -->
 			            <td>
 				            <div id="d_file">
 				            </div>
@@ -193,7 +193,7 @@
 		</div>
 	</div>
 	<div class="clear"></div>
-<center>	
+<center>
 	 <table>
 	 <tr>
 			  <td align=center>

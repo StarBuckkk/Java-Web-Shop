@@ -60,21 +60,21 @@
     }
 
    
-   window.onload=function()
+   window.onload=function() // 브라우저에서 페이지를 로드할 때 실행
     {
       selectBoxInit();
     }
 
     function selectBoxInit(){
     
-     var tel1='${memberInfo.tel1 }';
-     var hp1='${memberInfo.hp1}';
+     var tel1='${memberInfo.tel1 }'; // 유선전화의 번호 저장
+     var hp1='${memberInfo.hp1}'; // 휴대폰
      var selTel1 = document.getElementById('tel1');
      var selHp1 = document.getElementById('hp1');
-     var optionTel1 = selTel1.options;
+     var optionTel1 = selTel1.options; // 유선전화와 휴대폰을 선택하는 셀렉트 박스에 접근
      var optionHp1 = selHp1.options;
      var val;
-     for(var i=0; i<optionTel1.length;i++){
+     for(var i=0; i<optionTel1.length;i++){ // 유선전화 국번의 셀렉트 박스 값을 tel1 값으로 초기화
        val = optionTel1[i].value;
        if(tel1 == val){
     	   optionTel1[i].selected= true;
@@ -82,7 +82,7 @@
        }
      }  
      
-     for(var i=0; i<optionHp1.length;i++){
+     for(var i=0; i<optionHp1.length;i++){ // 휴대폰 국번의 셀렉트 박스 값을 hp1 값으로 초기화
          val = optionHp1[i].value;
          if(hp1 == val){
         	 optionHp1[i].selected= true;
@@ -337,7 +337,7 @@ function fn_modify_member_info(attribute){
 				<tr class="dot_line">
 					<td class="fixed_join">전화번호</td>
 					<td>
-					    <select  name="tel1" id="tel1"  >
+					    <select  name="tel1" id="tel1"  > <!-- 유선전화 번화를 선택하는 셀렉트 박스 -->
 							<option value="00">없음</option>
 							<option value="02">02</option>
 							<option value="031">031</option>
@@ -374,7 +374,7 @@ function fn_modify_member_info(attribute){
 				<tr class="dot_line">
 					<td class="fixed_join">휴대폰번호</td>
 					<td>
-					   <select  name="hp1" id="hp1">
+					   <select  name="hp1" id="hp1"> <!-- 휴대폰 번호를 선택하는 셀렉트 박스 -->
 							<option>없음</option>
 							<option value="010">010</option>
 							<option value="011">011</option>

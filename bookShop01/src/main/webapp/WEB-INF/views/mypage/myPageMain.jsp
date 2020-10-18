@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<c:if test="${message=='cancel_order'}">
+<c:if test="${message=='cancel_order'}"> <%-- 주문 취소 후 다시 페이지를 요청할 경우 주문 취소 메시지를 출력 --%>
 	<script>
 	window.onload=function()
 	{
@@ -82,7 +82,7 @@ function fn_cancel_order(order_id){
 		    <td><span>${item.pay_order_time }</span></td>
 			<td align="left">
 			   <strong>
-			      <c:forEach var="item2" items="${myOrderList}" varStatus="j">
+			      <c:forEach var="item2" items="${myOrderList}" varStatus="j"> <%-- <forEach> 태그를 이용해 주문당 해당 상품명을 한꺼번에 표시 --%>
 			          <c:if  test="${item.order_id ==item2.order_id}" >
 			            <a href="${contextPath}/goods/goodsDetail.do?goods_id=${item2.goods_id }">${item2.goods_title }/${item.order_goods_qty }개</a><br>
 			         </c:if>   
@@ -105,7 +105,7 @@ function fn_cancel_order(order_id){
 			    <c:when test="${item.delivery_state=='returning_goods' }">
 			       반품완료
 			    </c:when>
-			  </c:choose>
+			  </c:choose><%-- 주문 상품의 배송 상태를 표시 --%>
 			</td>
 			<td>
 			  <c:choose>
@@ -115,7 +115,7 @@ function fn_cancel_order(order_id){
 			   <c:otherwise>
 			      <input  type="button" onClick="fn_cancel_order('${item.order_id}')" value="주문취소" disabled />
 			   </c:otherwise>
-			  </c:choose>
+			  </c:choose> <%-- '배송준비중'일 때만 주문 취소가 가능 --%>
 			</td>
 			</tr>
           <c:set  var="pre_order_id" value="${item.order_id}" />
