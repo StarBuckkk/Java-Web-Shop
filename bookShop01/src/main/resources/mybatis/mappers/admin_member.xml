@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!-- 각 설정 파일은 src 패키지 아래에 위치해야 한다. -->
 
-<mapper namespace="mapper.admin.member">
+<mapper namespace="mapper.admin.member"> <!-- 다른 파일의 SQL문과 구별하기 위해 mapper.admin.member로 네임스페이스 지정 -->
+
+<!-- src 패키지 아래에 admin_member.xml은 /mybatis/mappers 패키지에 위치 -->
+
+<!-- 관리자의 회원 정보를 저장할 resultMap을 정의 -->	
 <resultMap id="memberResult" type="MemberVO">
 		<result property="member_id" column="member_id" />
 		<result property="member_pw" column="member_pw" />
@@ -34,6 +38,10 @@
 		<result property="joinDate" column="joinDate" />
 		<result property="del_yn" column="del_yn" />
 	</resultMap>
+	
+	<!-- SQL문의 >, <, <=, >= 같은 연산자들은 XML 파일에서 작성하면 연산자가 아닌 특수 문자로 인식하므로 오류 발생 -->
+	<!-- 이러한 연산자들도 SQL문의 일부라는 것을 알려주기 위해 <![CDATA[ ... ]]> 태그로 작성해야 한다. -->
+	
 <select id="listMember" resultMap="memberResult"   parameterType="java.util.HashMap"  >
 		  select * from (
 			    select rowNum as recNum,t.*

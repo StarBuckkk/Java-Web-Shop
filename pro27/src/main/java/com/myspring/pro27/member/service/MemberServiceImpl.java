@@ -12,12 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.myspring.pro27.member.dao.MemberDAO;
 import com.myspring.pro27.member.vo.MemberVO;
 
-
-@Service("memberService")
+ 
+@Service("memberService") // MemberServiceImpl 클래스를 이용해 id가 memberService인 빈을 자동 생성
 @Transactional(propagation = Propagation.REQUIRED)
 public class MemberServiceImpl implements MemberService {
 	@Autowired
-	private MemberDAO memberDAO;
+	private MemberDAO memberDAO; // id가 memberDAO인 빈을 자동 주입
 
 	@Override
 	public List listMembers() throws DataAccessException {
@@ -37,7 +37,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public MemberVO login(MemberVO memberVO) throws Exception{
+	public MemberVO login(MemberVO memberVO) throws Exception { // 전달된 id와 비밀번호를 전달하도록 구현
 		return memberDAO.loginById(memberVO);
 	}
 

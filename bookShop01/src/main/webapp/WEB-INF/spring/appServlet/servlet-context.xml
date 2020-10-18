@@ -14,30 +14,34 @@
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/resources/**" location="/resources/" /> <!-- /resources 폴더의 HTML, JS, JQ, 이미지들을 읽어들여 설정 -->
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+
+<!-- 타일즈 설정 -->
+<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer"> <!-- 스프링의 TilesConfigurer 클래스를 이용해 tilesConfigurer 빈 생성 -->
 	<beans:property name="definitions">
 		<beans:list>
-			<beans:value>classpath:tiles/*.xml</beans:value>
+			<beans:value>classpath:tiles/*.xml</beans:value> <!-- 패키지 tiles의 모든 설정 xml 파일을 읽어 들임 -->
 		</beans:list>
 	</beans:property>
 	<beans:property name="preparerFactoryClass" value="org.springframework.web.servlet.view.tiles2.SpringBeanPreparerFactory"/>
 </beans:bean>
-<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver"> 
+
+<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver"> <!-- 타일즈 뷰리졸버를 사용해 화면을 표시 -->
 	<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/> 
 </beans:bean>
 	<context:component-scan base-package="com.bookshop01" />
 	
+	<!-- 2단계와 3단계 요청에 대해 인터셉터 설정 -->
 	<mvc:interceptors>
   <mvc:interceptor>
-    <mvc:mapping path="/*/*.do"/> 
+    <mvc:mapping path="/*/*.do"/>  <!-- 모든 요청에 대해 인터셉터 빈을 수행 -->
     <mvc:mapping path="/*/*/*.do"/> 
       <beans:bean class="com.bookshop01.common.interceptor.ViewNameInterceptor" />
   </mvc:interceptor>
  </mvc:interceptors>
  
- 	<!-- 멀티파트 리졸버 -->
+ 	<!-- 다중 파일 업로드 기능을 위한 멀티파트 리졸버 -->
     <beans:bean id="multipartResolver"  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
        <beans:property name="maxUploadSize" value="52428800" />
        <beans:property name="maxInMemorySize" value="52428800" />

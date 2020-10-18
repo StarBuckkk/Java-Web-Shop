@@ -19,51 +19,56 @@ import com.spring.member.vo.MemberVO;
 
 
 
-@Controller("memberController")
+@Controller("memberController") // @Controller를 이용해 MemberControllerimpl 클래스에 대해 id가 memberController인 빈을 자동 생성
 public class MemberControllerImpl   implements MemberController {
 	@Autowired
-	private MemberService memberService;
+	private MemberService memberService; // @Autowired를 이용해 id가 memberService인 빈을 자동 주입
 	@Autowired
-	private MemberVO memberVO ;
+	private MemberVO memberVO ; // @Autowired를 이용해 id가 memberVO인 빈을 자동 주입
 	
 	@Override
-	@RequestMapping(value="/member/listMembers.do" ,method = RequestMethod.GET)
+	@RequestMapping(value = "/member/listMembers.do", method = RequestMethod.GET) // 두 단계로 요청 시 바로 해당 메서드를 호출하도록 매핑
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = getViewName(request);
 		List membersList = memberService.listMembers();
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("membersList", membersList);
+		
 		return mav;
 	}
 
 	@Override
-	@RequestMapping(value="/member/addMember.do" ,method = RequestMethod.POST)
+	@RequestMapping(value = "/member/addMember.do", method = RequestMethod.POST)
 	public ModelAndView addMember(@ModelAttribute("member") MemberVO member,
-			                  HttpServletRequest request, HttpServletResponse response) throws Exception {
+			                  HttpServletRequest request, HttpServletResponse response) throws Exception { // 회원 가입창에서 전송된 회원 정보를 바로 MemberVO 객체에 설정
 		request.setCharacterEncoding("utf-8");
 		int result = 0;
-		result = memberService.addMember(member);
+		result = memberService.addMember(member); // 설정된 memberVO 객체를 SQL문으로 전달해 회원 등록을 합니다.
 		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
+		
 		return mav;
 	}
 	
 	@Override
-	@RequestMapping(value="/member/removeMember.do" ,method = RequestMethod.GET)
+	@RequestMapping(value = "/member/removeMember.do", method = RequestMethod.GET)
 	public ModelAndView removeMember(@RequestParam("id") String id, 
-			           HttpServletRequest request, HttpServletResponse response) throws Exception{
+			           HttpServletRequest request, HttpServletResponse response) throws Exception { // 전송된 id를 변수 id에 설정
 		request.setCharacterEncoding("utf-8");
 		memberService.removeMember(id);
 		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
+		
 		return mav;
 	}
 	
 	/*@RequestMapping(value = { "/member/loginForm.do", "/member/memberForm.do" }, method =  RequestMethod.GET)*/
 	@RequestMapping(value = "/member/*Form.do", method =  RequestMethod.GET)
-	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception { // 정규식을 이용해 요청명이 Form.do로 끝나면 form() 메서드를 호출
 		String viewName = getViewName(request);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
+		
 		return mav;
+		
 	}
 	
 	
@@ -71,30 +76,37 @@ public class MemberControllerImpl   implements MemberController {
 	private String getViewName(HttpServletRequest request) throws Exception {
 		String contextPath = request.getContextPath();
 		String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
-		if (uri == null || uri.trim().equals("")) {
+		
+		if (uri == null || uri.trim().equals("") ) {
 			uri = request.getRequestURI();
 		}
 
 		int begin = 0;
-		if (!((contextPath == null) || ("".equals(contextPath)))) {
+		
+		if (! ( (contextPath == null) || ("".equals(contextPath) ) ) ) {
 			begin = contextPath.length();
 		}
 
 		int end;
+		
 		if (uri.indexOf(";") != -1) {
 			end = uri.indexOf(";");
+			
 		} else if (uri.indexOf("?") != -1) {
 			end = uri.indexOf("?");
+			
 		} else {
 			end = uri.length();
 		}
 
 		String viewName = uri.substring(begin, end);
+		
 		if (viewName.indexOf(".") != -1) {
-			viewName = viewName.substring(0, viewName.lastIndexOf("."));
+			viewName = viewName.substring(0, viewName.lastIndexOf(".") );
 		}
+		
 		if (viewName.lastIndexOf("/") != -1) {
-			viewName = viewName.substring(viewName.lastIndexOf("/"), viewName.length());
+			viewName = viewName.substring(viewName.lastIndexOf("/"), viewName.length() );
 		}
 		return viewName;
 	}

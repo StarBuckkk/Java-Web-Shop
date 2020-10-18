@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="pro26">
+        
+    <wb-module deploy-name="pro26_Spring_Annotation">
+                
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="pro26"/>
-        <property name="java-output-path" value="/pro26/build/classes"/>
+                
+        <property name="java-output-path" value="/pro26_Spring_Annotation/build/classes"/>
+        <property name="context-root" value="pro26_Spring_Annotation"/>
+            
     </wb-module>
+    
 </project-modules>

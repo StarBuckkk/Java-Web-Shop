@@ -1,4 +1,4 @@
-package com.spring.ex02;
+package com.spring.ex02; // 애너테이션이 적용되도록 하려면 해당 클래스가 반드시 <component-scan>에서 설정한 패키지나 하위 패키지에 존재해야 한다.
 
 import java.util.Map;
 
@@ -13,16 +13,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller("loginController")
+@Controller("loginController") // 컨트롤러 빈을 자동 생성
 public class LoginController {
-	@RequestMapping(value = { "/test/loginForm.do", "/test/loginForm2.do" }, method = { RequestMethod.GET })
+	@RequestMapping(value = { "/test/loginForm.do", "/test/loginForm2.do" }, method = { RequestMethod.GET }) // test/loginForm.do와 /test/loginform2.do로 요청 시 loginForm()을 호출
 	public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("loginForm");
+		
 		return mav;
 	}
 	
-    @RequestMapping(value = "/test/login.do", method={RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/test/login.do", method = { RequestMethod.GET,RequestMethod.POST }) // GET 방식과 POST 방식 요청 시 모두 처리
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView();

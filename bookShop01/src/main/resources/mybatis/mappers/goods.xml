@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 
-<mapper namespace="mapper.goods">
-<!-- 리절트 맵 정의 -->	
+<mapper namespace="mapper.goods"> <!-- 다른 파일의 SQL문과 구별하기 위해 mapper.goods로 네임스페이스 지정 -->
+
+<!-- src 패키지 아래에 goods.xml은 /mybatis/mappers 패키지에 위치 -->
+
+<!-- 상품 정보를 저장할 resultMap 정의 -->	
 	<resultMap id="goodsResult" type="goodsVO">
-		<result property="goods_id" column="goods_id" />
+		<result property="goods_id" column="goods_id" /> <!-- src 패키지 아래에 goods.xml은 /mybatis/mappers 패키지에 위치 -->
 		<result property="goods_title" column="goods_title" />
 		<result property="goods_writer" column="goods_writer" />
 		<result property="goods_price" column="goods_price" />
@@ -25,7 +28,7 @@
 		<result property="goods_writer_intro" column="goods_writer_intro" />
 		<result property="goods_contents_order" column="goods_contents_order" />
 		<result property="goods_intro" column="goods_intro" />
-	</resultMap>	
+	</resultMap> <!-- 상품 정보를 저장하는 resultMap -->
 
 	<resultMap id="imageResult" type="ImageFileVO">
 	   <result property="goods_id" column="goods_id" />
@@ -33,12 +36,12 @@
 	   <result property="reg_id" column="reg_id" />
 	   <result property="image_id" column="image_id" />
 	   <result property="fileType" column="fileType" />
-	</resultMap>
+	</resultMap> <!-- 상품 이미지 정보를 저장하는 resultMap -->
 	
-
+	<!-- SQL문의 >, <, <=, >= 같은 연산자들은 XML 파일에서 작성하면 연산자가 아닌 특수 문자로 인식하므로 오류 발생 -->
+	<!-- 이러한 연산자들도 SQL문의 일부라는 것을 알려주기 위해 <![CDATA[ ... ]]> 태그로 작성해야 한다. -->
 	
-   
-      <select id="selectGoodsList" parameterType="String" resultMap="goodsResult"   >
+      <select id="selectGoodsList" parameterType="String" resultMap="goodsResult"   > <!-- DAO에서 id를 이용해 해당 SQL문을 호출하고 반환되는 레코드를 goodsResult에 저장-->
         <![CDATA[
          select t.*
           from(
@@ -49,7 +52,7 @@
             order by g.goods_creDate desc)  t
 	             where   rowNum <16
 	    ]]>
-	</select>
+	</select> <!-- goods_status의 조건 값으로 '신상품', '베스트셀러', '스테디셀러'를 전달해 각각의 상품을 15개까지 조회 -->
 	
 	<select id="selectGoodsDetail" resultMap="goodsResult"   parameterType="String"  >
 	    <![CDATA[
@@ -59,14 +62,15 @@
 	        and g.goods_id=#{goods_id}
 	        order by g.goods_id
     	]]>
-	</select>
+	</select> <!-- 상품 정보와 메인 이미지 파일 정보를 조회 -->
+	
 	<select id="selectGoodsDetailImage" resultMap="imageResult"   parameterType="String"  >
 	    <![CDATA[
 		    	select * from  t_goods_detail_image 
 		    	where  fileType!='main_image'
 				and goods_id=#{goods_id}
     	]]>
-	</select>
+	</select> <!-- 상품 상세 이미지 파일 정보를 조회 -->
 	
    <select id="selectGoodsBySearchWord" resultMap="goodsResult"   parameterType="String"  >
      <![CDATA[
@@ -76,7 +80,7 @@
 		    and g.goods_title like '%'|| #{searchWord} || '%'
 		    order by g.goods_creDate desc
 		]]>
-	</select>	
+	</select> <!-- 검색창에입력한 단어를 가져와 그 단어가 포함된 상품 제목을 조회 -->
 	
 	<select id="selectKeywordSearch" resultType="String"   parameterType="String"  >
 	    <![CDATA[
@@ -85,7 +89,7 @@
         goods_title like '%'|| #{keyword} || '%'
         order by goods_creDate desc
 		]]>
-	</select>
+	</select> <!-- 검색창에 입력한 키워드를 가져와 그 키워드가 포함된 상품 제목을 조회 -->
 	
 
 </mapper>

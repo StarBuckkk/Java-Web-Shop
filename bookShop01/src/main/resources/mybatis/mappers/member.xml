@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!-- 각 설정 파일은 src 패키지 아래에 위치해야 한다. -->
 
-<mapper namespace="mapper.member">
-<!-- 리절트 맵 정의 -->	
+<mapper namespace="mapper.member"> <!-- 다른 파일의 SQL문과 구별하기 위해 mapper.member로 네임스페이스 지정 -->
+
+<!-- src 패키지 아래에 member.xml은 /mybatis/mappers 패키지에 위치 -->
+
+<!-- 회원 정보를 저장할 resultMap을 정의 -->	
 	<resultMap id="memberResult" type="MemberVO">
-		<result property="member_id" column="member_id" />
-		<result property="member_pw" column="member_pw" />
+		<result property="member_id" column="member_id" /> <!-- 레코드의 컬럼 이름에 대해 memberVO 같은 속성에 값을 설정 --> 
+		<result property="member_pw" column="member_pw" /> 
 		<result property="member_name" column="member_name" />
 		<result property="member_gender" column="member_gender" />
 		
@@ -34,6 +37,9 @@
 		<result property="namujiAddress" column="namujiAddress" />
 		<result property="joinDate" column="joinDate" />
 	</resultMap>	
+	
+	<!-- SQL문의 >, <, <=, >= 같은 연산자들은 XML 파일에서 작성하면 연산자가 아닌 특수 문자로 인식하므로 오류 발생 -->
+	<!-- 이러한 연산자들도 SQL문의 일부라는 것을 알려주기 위해 <![CDATA[ ... ]]> 태그로 작성해야 한다. -->
 
 	<select id="login" resultType="memberVO"  parameterType="java.util.Map"  >
 	    <![CDATA[
@@ -48,12 +54,13 @@
 	   select decode(count(*),1, 'true', 0, 'false')
 	   from t_shopping_member
 	   where member_id = #{id}
-	</select>
+	</select> <!-- 회원 가입 시 입력한 id로 id 중복 검사를 한다. -->
 	
-  <insert id="insertNewMember"  parameterType="memberVO">
+  <insert id="insertNewMember"  parameterType="memberVO"> <!-- MemberDAO에서 회원 정보를 memberVO의 속성에 저장해서 넘김 -->
   <![CDATA[
-    	insert into t_shopping_member(member_id,
-				 					                  member_pw,
+    	insert into t_shopping_member (
+									 member_id,
+									 member_pw,
                                      member_name,
                                      member_gender,
                                      member_birth_y,
@@ -95,9 +102,10 @@
                                     #{zipcode},
                                     #{roadAddress},
                                     #{jibunAddress},
-                                    #{namujiAddress})
+                                    #{namujiAddress}
+									)
                                   
                                       
    ]]>      
-  </insert>
+  </insert> <!-- 회원 가입창에서 입력한 회원 정보를 테이블에 추가 -->
 </mapper>

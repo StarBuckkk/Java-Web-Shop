@@ -7,5 +7,5 @@
 		<typeAlias type="com.myspring.pro30.member.vo.MemberVO"  alias="memberVO" />
 		<typeAlias type="com.myspring.pro30.board.vo.ArticleVO"  alias="articleVO" />
 		<typeAlias type="com.myspring.pro30.board.vo.ImageVO"  alias="imageVO" />
-	</typeAliases>
+	</typeAliases> <!-- <typeAliases> 태그로 마이바티스에서 데이터 전달에 사용될 memberVO, articleVO, imageVO 빈을 설정 -->
 </configuration>

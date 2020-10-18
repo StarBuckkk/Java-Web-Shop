@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.spring.member.dao.MemberDAO;
 import com.spring.member.vo.MemberVO;
 
-@Service("memberService")
+@Service("memberService") // MemberServiceImpl 클래스를 이용해 id가 memberService인 빈을 자동 생성
 @Transactional(propagation = Propagation.REQUIRED)
 public class MemberServiceImpl implements MemberService {
-	@Autowired
-	private MemberDAO memberDAO;
+	@Autowired 
+	private MemberDAO memberDAO; // id가 memberDAO인 빈을 자동 주입
 
 	@Override
 	public List listMembers() throws DataAccessException {

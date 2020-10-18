@@ -99,7 +99,7 @@
     }
     
   window.onload=function()
-  {
+  { // 상품 주문 페이지가 표시되면 주문자의 휴대폰 번호와 유선 전화번호를 셀렉트 박스에 표시
     init();
   }
 
@@ -115,7 +115,7 @@
   	select_hp1.value=hp1;
   }    
     
-	function reset_all() {
+	function reset_all() { // 
 		var e_receiver_name = document.getElementById("receiver_name");
 		var e_hp1 = document.getElementById("hp1");
 		var e_hp2 = document.getElementById("hp2");
@@ -414,9 +414,9 @@ function fn_show_order_detail(){
 	imagePopup('open');
 }
 
-function fn_process_pay_order(){
-	
-	alert("최종 결제하기");
+function fn_process_pay_order(){ // 최종 결제하기를 클릭하면 <input> 태그를 동적으로 생성한 후
+	// 주문창에서 입력한 수령자 정보를 설정하여 컨트롤러로 전송
+	alert("결제하였습니다.");
 	var formObj=document.createElement("form");
     var i_receiver_name=document.createElement("input");
     
@@ -981,7 +981,8 @@ function fn_process_pay_order(){
 				   </tr>
 				   <tr>
 				    <td colspan=2 align=center>
-				    <input  name="btn_process_pay_order" type="button" onClick="fn_process_pay_order()" value="최종결제하기">
+				    <!-- 최종 결제하기 클릭 시 호출됨 -->
+				    <input  name="btn_process_pay_order" type="button" onClick="fn_process_pay_order()" value="모두 확인하였으며 결제를 진행하겠습니다.">
 				    </td>
 				   </tr>
 				</tbody>

@@ -9,9 +9,9 @@
 <c:set var="imageList"  value="${goodsMap.imageList }"  />
  <%
      //치환 변수 선언합니다.
-      //pageContext.setAttribute("crcn", "\r\n"); //개행문자
-      pageContext.setAttribute("crcn" , "\n"); //Ajax로 변경 시 개행 문자 
-      pageContext.setAttribute("br", "<br/>"); //br 태그
+      //pageContext.setAttribute("crcn", "\r\n"); // 텍스트 개행문자를 변수 crcn으로 대체
+      pageContext.setAttribute("crcn" , "\n"); // Ajax로 변경 시 개행 문자 
+      pageContext.setAttribute("br", "<br/>"); // br 태그를 변수 br로 대체
 %>  
 <html>
 <head>
@@ -46,18 +46,15 @@
 		$.ajax({
 			type : "post",
 			async : false, //false인 경우 동기식으로 처리한다.
-			url : "${contextPath}/cart/addGoodsInCart.do",
-			data : {
-				goods_id:goods_id
-				
-			},
+			url : "${contextPath}/cart/addGoodsInCart.do", // Ajax를 이용해 장바구니에 추가할 상품 번호를 전송
+			data : { goods_id:goods_id },
 			success : function(data, textStatus) {
 				//alert(data);
 			//	$('#message').append(data);
 				if(data.trim()=='add_success'){
 					imagePopup('open', '.layer01');	
 				}else if(data.trim()=='already_existed'){
-					alert("이미 카트에 등록된 상품입니다.");	
+					alert("이미 카트에 등록된 상품입니다."); // 장바구니에 추가하면 알림창을 표시	
 				}
 				
 			},
@@ -87,25 +84,25 @@
 	}
 	
 function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
-	var _isLogOn=document.getElementById("isLogOn");
+	var _isLogOn=document.getElementById("isLogOn"); // <hidden> 태그의 id로 로그인 상태를 가져옴
 	var isLogOn=_isLogOn.value;
 	
-	 if(isLogOn=="false" || isLogOn=='' ){
+	 if(isLogOn=="false" || isLogOn=='' ){ // 로그인 상태를 확인
 		alert("로그인 후 주문이 가능합니다!!!");
 	} 
 	
 	
 		var total_price,final_total_price;
-		var order_goods_qty=document.getElementById("order_goods_qty");
+		var order_goods_qty=document.getElementById("order_goods_qty"); // 상품 주문 개수를 가져옴
 		
-		var formObj=document.createElement("form");
+		var formObj=document.createElement("form"); // <form> 태그를 동적으로 생성
 		var i_goods_id = document.createElement("input"); 
     var i_goods_title = document.createElement("input");
     var i_goods_sales_price=document.createElement("input");
     var i_fileName=document.createElement("input");
-    var i_order_goods_qty=document.createElement("input");
+    var i_order_goods_qty=document.createElement("input"); // 주문 상품 정보를 전송할 <input> 태그를 동적으로 생성
     
-    i_goods_id.name="goods_id";
+    i_goods_id.name="goods_id"; // <input> 태그에 name/value로 값을 설정
     i_goods_title.name="goods_title";
     i_goods_sales_price.name="goods_sales_price";
     i_fileName.name="goods_fileName";
@@ -117,7 +114,7 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
     i_goods_sales_price.value=goods_sales_price;
     i_fileName.value=fileName;
     
-    formObj.appendChild(i_goods_id);
+    formObj.appendChild(i_goods_id); // 동적으로 생성한 <input> 태그에 값을 설정한 후 다시 <form> 태그에 추가
     formObj.appendChild(i_goods_title);
     formObj.appendChild(i_goods_sales_price);
     formObj.appendChild(i_fileName);
@@ -125,7 +122,7 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 
     document.body.appendChild(formObj); 
     formObj.method="post";
-    formObj.action="${contextPath}/order/orderEachGoods.do";
+    formObj.action="${contextPath}/order/orderEachGoods.do"; // 컨트롤러로 요청하면서 <input> 태그의 값을 매개변수로 전달
     formObj.submit();
 	}	
 </script>
@@ -199,7 +196,7 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 				<tr>
 					<td class="fixed">수량</td>
 					<td class="fixed">
-			      <select style="width: 60px;" id="order_goods_qty">
+			      <select style="width: 60px;" id="order_goods_qty"> <!-- 셀렉트 박스로 주문 수량을 선택 -->
 				      <option>1</option>
 							<option>2</option>
 							<option>3</option>
@@ -211,7 +208,9 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 			</tbody>
 		</table>
 		<ul>
+			<!-- 구매하기 클릭 시 자ㅏ스크립트 함수로 상품 번호, 상품명, 판매 가격, 이미지 파일 이름을 전달 -->
 			<li><a class="buy" href="javascript:fn_order_each_goods('${goods.goods_id }','${goods.goods_title }','${goods.goods_sales_price}','${goods.goods_fileName}');">구매하기 </a></li>
+			<!-- 장바구니를 클릭하면 추가할 상품 번호를 함수로 전달 -->
 			<li><a class="cart" href="javascript:add_cart('${goods.goods_id }')">장바구니</a></li>
 			
 			<li><a class="wish" href="#">위시리스트</a></li>
@@ -231,7 +230,7 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 		<div class="tab_container">
 			<div class="tab_content" id="tab1">
 				<h4>책소개</h4>
-				<p>${fn:replace(goods.goods_intro,crcn,br)}</p>
+				<p>${fn:replace(goods.goods_intro,crcn,br)}</p> <%-- replace 함수를 이용해 저자 소개에 포함된 crcn(개행문자)을 br(<br>태그로 대체) --%>
 				<c:forEach var="image" items="${imageList }">
 					<img 
 						src="${contextPath}/download.do?goods_id=${goods.goods_id}&fileName=${image.fileName}">
@@ -241,20 +240,20 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 				<h4>저자소개</h4>
 				<p>
 				<div class="writer">저자 : ${goods.goods_writer}</div>
-				 <p>${fn:replace(goods.goods_writer_intro,crcn,br) }</p> 
+				 <p>${fn:replace(goods.goods_writer_intro,crcn,br) }</p> <%-- 개행문자를 br로 대체 --%> 
 				
 			</div>
 			<div class="tab_content" id="tab3">
 				<h4>책목차</h4>
-				<p>${fn:replace(goods.goods_contents_order,crcn,br)}</p> 
+				<p>${fn:replace(goods.goods_contents_order,crcn,br)}</p> <%-- 개행문자를 br로 대체 --%> 
 			</div>
 			<div class="tab_content" id="tab4">
 				<h4>출판사서평</h4>
-				 <p>${fn:replace(goods.goods_publisher_comment ,crcn,br)}</p> 
+				 <p>${fn:replace(goods.goods_publisher_comment ,crcn,br)}</p> <%-- 개행문자를 br로 대체 --%> 
 			</div>
 			<div class="tab_content" id="tab5">
 				<h4>추천사</h4>
-				<p>${fn:replace(goods.goods_recommendation,crcn,br) }</p>
+				<p>${fn:replace(goods.goods_recommendation,crcn,br) }</p> <%-- 개행문자를 br로 대체 --%>
 			</div>
 			<div class="tab_content" id="tab6">
 				<h4>리뷰</h4>
@@ -274,4 +273,4 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 </form>			
 </body>
 </html>
-<input type="hidden" name="isLogOn" id="isLogOn" value="${isLogOn}"/>
+<input type="hidden" name="isLogOn" id="isLogOn" value="${isLogOn}"/> <!-- 로그인 상태를 <hidden> 태그에 저장 -->

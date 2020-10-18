@@ -25,17 +25,17 @@
       <td><b>삭제</b></td>
    </tr>
    
- <c:forEach var="member" items="${membersList}" >     
+ <c:forEach var="member" items="${membersList}" > <%-- 컨트롤러에서 바인딩한 memberList로 접근 --%> 
    <tr align="center">
       <td>${member.id}</td>
       <td>${member.pwd}</td>
       <td>${member.name}</td>
       <td>${member.email}</td>
       <td>${member.joinDate}</td>
-      <td><a href="${contextPath}/member/removeMember.do?id=${member.id }">삭제하기</a></td>
+      <td><a href="${contextPath}/member/removeMember.do?id=${member.id }">삭제하기</a></td> <%-- 삭제하기 클릭 시 /member/removeMember.do로 요청  --%>
     </tr>
   </c:forEach>   
 </table>
-<a  href="${contextPath}/member/memberForm.do"><h1 style="text-align:center">회원가입</h1></a>
+<a  href="${contextPath}/member/memberForm.do"><h1 style="text-align:center">회원가입</h1></a> <%-- 회원가입 클릭 시 /member/memberForm.do로 요청 --%>
 </body>
 </html>

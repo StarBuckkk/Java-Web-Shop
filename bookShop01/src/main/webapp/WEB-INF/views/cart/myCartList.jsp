@@ -8,11 +8,12 @@
 <c:set var="myCartList"  value="${cartMap.myCartList}"  />
 <c:set var="myGoodsList"  value="${cartMap.myGoodsList}"  />
 
-<c:set  var="totalGoodsNum" value="0" />  <!--주문 개수 -->
-<c:set  var="totalDeliveryPrice" value="0" /> <!-- 총 배송비 --> 
-<c:set  var="totalDiscountedPrice" value="0" /> <!-- 총 할인금액 -->
+<c:set  var="totalGoodsNum" value="0" />  <!--장바구니에 추가된 상품의 총 주문 개수 -->
+<c:set  var="totalDeliveryPrice" value="0" /> <!-- 장바구니에 추가된 상품의 총 배송비 --> 
+<c:set  var="totalDiscountedPrice" value="0" /> <!-- 장바구니에 추가된 상품의 총 할인금액 -->
 <head>
 <script type="text/javascript">
+
 function calcGoodsPrice(bookPrice,obj){
 	var totalPrice,final_total_price,totalNum;
 	var goods_qty=document.getElementById("select_goods_qty");
@@ -24,6 +25,7 @@ function calcGoodsPrice(bookPrice,obj){
 	var h_totalPrice=document.getElementById("h_totalPrice");
 	var h_totalDelivery=document.getElementById("h_totalDelivery");
 	var h_final_total_price=document.getElementById("h_final_totalPrice");
+	
 	if(obj.checked==true){
 	//	alert("체크 했음")
 		
@@ -152,8 +154,8 @@ function fn_order_all_cart_goods(){
 	var objForm=document.frm_order_all_cart;
 	var cart_goods_qty=objForm.cart_goods_qty;
 	var h_order_each_goods_qty=objForm.h_order_each_goods_qty;
-	var checked_goods=objForm.checked_goods;
-	var length=checked_goods.length;
+	var checked_goods=objForm.checked_goods; // 상품 주문 여부를 체크하는 체크박스 객체를 가져옴
+	var length=checked_goods.length; // 주문용으로 선택한 총 상품 개수를 가져옴
 	
 	
 	//alert(length);
@@ -167,11 +169,11 @@ function fn_order_all_cart_goods(){
 				//alert(select_goods_qty[i].value);
 				console.log(cart_goods_qty[i].value);
 			}
-		}	
+		} // 여러 상품을 주문할 경우 하나의 상품에 대해 상품번호:'주문수량' 문자열로 만든 후 전체 상품 정보를 배열로 전송
 	}else{
 		order_goods_id=checked_goods.value;
 		order_goods_qty=cart_goods_qty.value;
-		cart_goods_qty.value=order_goods_id+":"+order_goods_qty;
+		cart_goods_qty.value=order_goods_id+":"+order_goods_qty; // 상품을 하나만 주문할 경우 문자열로 전송
 		//alert(select_goods_qty.value);
 	}
 		
@@ -206,18 +208,18 @@ function fn_order_all_cart_goods(){
 			        <c:otherwise>
 			 <tr>       
                <form name="frm_order_all_cart">
-				      <c:forEach var="item" items="${myGoodsList }" varStatus="cnt">
-				       <c:set var="cart_goods_qty" value="${myCartList[cnt.count-1].cart_goods_qty}" />
+				      <c:forEach var="item" items="${myGoodsList }" varStatus="cnt"> <%-- 장바구니에 등록된 상품 번호로 조회한 상품 목록을 표시 --%>
+				       <c:set var="cart_goods_qty" value="${myCartList[cnt.count-1].cart_goods_qty}" /><%-- 장바구니에 담긴 상품 수량을 표시하기 위해 변수를 설정 --%>
 				       <c:set var="cart_id" value="${myCartList[cnt.count-1].cart_id}" />
 					<td><input type="checkbox" name="checked_goods"  checked  value="${item.goods_id }"  onClick="calcGoodsPrice(${item.goods_sales_price },this)"></td>
 					<td class="goods_image">
 					<a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
-						<img width="75" alt="" src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}"  />
+						<img width="75" alt="" src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}"  /> <%-- 상품의 이미지 표시 --%>
 					</a>
 					</td>
 					<td>
 						<h2>
-							<a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">${item.goods_title }</a>
+							<a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">${item.goods_title }</a> <%-- 상품 이름을 표시 --%>
 						</h2>
 					</td>
 					<td class="price"><span>${item.goods_price }원</span></td>

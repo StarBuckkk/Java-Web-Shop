@@ -11,7 +11,7 @@
 	</property>
 	</bean>
 
- 	<bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
+ 	<bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource"> <!-- PropertyPlaceholderConfigurer 클래스를 이용해 데이터베이스 설정 관련 정보를 jdbc.properties 파일에서 읽어들임 -->
 		<property name="driver" value="${jdbc.driverClassName}" />
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
@@ -20,22 +20,22 @@
 	
 	
 	<bean id="sqlSessionFactory"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
+		class="org.mybatis.spring.SqlSessionFactoryBean"> <!-- SqlSessionFactoryBean 클래스를 이용해 dataSource 속성에 dataSource 빈을 설정 -->
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation"
-			value="classpath:mybatis/model/modelConfig.xml" />
-		<property name="mapperLocations" value="classpath:mybatis/mappers/*.xml" />
+			value="classpath:mybatis/model/modelConfig.xml" /> <!-- configLocation 속성에 modelConfig.xml을 설정-->
+		<property name="mapperLocations" value="classpath:mybatis/mappers/*.xml" /> <!-- mapperLocations 속성에 mybatis/mappers 패키지의 모든 매퍼 파일들을 일어 들여와 설정 -->
 	</bean>
 
 	<bean id="sqlSession"
-		class="org.mybatis.spring.SqlSessionTemplate">
+		class="org.mybatis.spring.SqlSessionTemplate"> <!-- SqlSessionTemplate 클래스를 이용해 sqlSession 빈을 생성 -->
 		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 
 
 	<bean id="memberDAO"
 		class="com.spring.member.dao.MemberDAOImpl">
-		<property name="sqlSession" ref="sqlSession"></property>
+		<property name="sqlSession" ref="sqlSession"></property> <!-- sqlSession 빈을 memberDAO 빈 속성에 주입 -->
 	</bean>
 
 </beans>

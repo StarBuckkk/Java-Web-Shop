@@ -16,6 +16,7 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
+	<!-- JSP 뷰리졸버 -->
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -32,11 +33,11 @@
        <beans:property name="defaultEncoding" value="utf-8" />
     </beans:bean>
 
-   <mvc:interceptors>
+   <mvc:interceptors> <!-- 인터셉터 기능을 사용하도록 설정 -->
       <mvc:interceptor>
-         <mvc:mapping path="/test/*.do"/> 
-				 <mvc:mapping path="/*/*.do"/>
-         <beans:bean class="com.myspring.pro28.ex05.LocaleInterceptor" />
+         <mvc:mapping path="/test/*.do"/> <!-- 특정 요청, 즉 /test/*do에 대해서만 인터셉터 빈을 수행 -->
+				 <mvc:mapping path="/*/*.do"/> <!-- 모든 요청에 대해 인터셉터 빈을 수행 -->
+         <beans:bean class="com.myspring.pro28.ex05.LocaleInterceptor" /> <!-- 인터셉터 기능을 수행할 빈을 설정 -->
       </mvc:interceptor>
    </mvc:interceptors>
 </beans:beans>

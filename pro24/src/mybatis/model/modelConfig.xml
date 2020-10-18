@@ -5,5 +5,5 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.spring.member.vo.MemberVO"  alias="memberVO" />
-	</typeAliases>
-</configuration>
+	</typeAliases> <!-- <typeAliases> 태그로 마이바티스에서 데이터 전달에 사용될 memberVO 빈을 설정 -->
+</configuration> 

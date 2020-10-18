@@ -10,7 +10,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-@Service("mailService")
+//@Service("mailService")
 public class MailService {
 	@Autowired
 	 private JavaMailSender mailSender;
@@ -20,15 +20,16 @@ public class MailService {
     @Async
     public void sendMail(String to, String subject, String body)
     {
-    	MimeMessage message = mailSender.createMimeMessage();
+    	MimeMessage message = mailSender.createMimeMessage(); // MimeMessage 타입 객체를 생성
     	 
     	  try {
-    	   MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+    	   MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8"); // 메일을 보내기 위해 MimeMessageHelper 객체 생성
     	   messageHelper.setSubject(subject);
     	   messageHelper.setTo(to);
-    	   messageHelper.setFrom("송신자@naver.com", "홍길동");
-    	  messageHelper.setText(body,true);
+    	   messageHelper.setFrom("송신자@naver.com", "홍길동"); // 메일 수신 시 지정한 이름으로 표시되게 함 / 지정하지 않으면 송신 메일 주소가 표시
+    	   messageHelper.setText(body,true);
     	   mailSender.send(message);
+    	   
     	  }catch(Exception e){
     		  e.printStackTrace();
     	  }
@@ -36,7 +37,7 @@ public class MailService {
     }
  
     @Async
-    public void sendPreConfiguredMail(String message) {
+    public void sendPreConfiguredMail(String message) { // mail-context.xml에서 미리 설정한 수신 주소로 메일 내용을 보냄
             SimpleMailMessage mailMessage = new SimpleMailMessage(preConfiguredMessage);
             mailMessage.setText(message);
             mailSender.send(mailMessage);

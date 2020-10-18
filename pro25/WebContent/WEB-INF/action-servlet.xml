@@ -16,7 +16,7 @@
        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
       <property name="viewClass" 
                           value="org.springframework.web.servlet.view.JstlView"/>
-      <property name="prefix" value="/WEB-INF/views/account/" /> 
+      <property name="prefix" value="/WEB-INF/views/account/" /> <!-- URL 요청명에 대해/WEB-INF views 폴더의 JSP를 선택 -->
       <property name="suffix" value=".jsp"/>
    </bean>
    
@@ -24,15 +24,15 @@
                             class="com.spring.account.AccountController">
       <property name="methodNameResolver">
          <ref local="methodResolver"/>
-      </property>
-      <property name="accService" ref="accService"/>
+      </property> <!-- 빈 주입 시 주입 받는 클래스에서느 주입되는 빈에 대한 setter를 반드시 구현해야 한다. -->
+      <property name="accService" ref="accService"/> <!-- accService 빈을 주입 -->
 </bean>
 
    <bean  id="methodResolver"
    class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver" >
       <property  name="mappings" >
         <props>
-          <prop key="/account/sendMoney.do" >sendMoney</prop>
+          <prop key="/account/sendMoney.do" >sendMoney</prop> <!-- URL 요청명에 대해 동일한 이름의 메서드를 호출하도록 설정 -->
        </props>
       </property>
    </bean>
@@ -42,7 +42,7 @@
        class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
       <property name="mappings">
          <props>
-            <prop key="/account/*.do">accController</prop>
+            <prop key="/account/*.do">accController</prop> <!-- /account/*do로 요청 시 accController 빈을 실행 -->
          </props>
       </property>
    </bean>

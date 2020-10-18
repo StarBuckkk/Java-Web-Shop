@@ -20,12 +20,12 @@
 	      alert("아이디나 비밀번호가 틀립니다.다시 로그인 하세요!");
 	    }
 	  </script>
-	</c:when>
+	</c:when> <%-- 로그인 실패 시 리다이렉트되면서 로그인 실패 메시지를 표시 --%>
 </c:choose>  
 </head>
 
 <body>
-<form name="frmLogin" method="post"  action="${contextPath}/member/login.do">
+<form name="frmLogin" method="post"  action="${contextPath}/member/login.do"> <%-- 로그인 클릭 시 /test/login.do로 요청 --%>
    <table border="1"  width="80%" align="center" >
       <tr align="center">
          <td>아이디</td>

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!-- 각 설정 파일은 src 패키지 아래에 위치해야 한다. -->
 
-<mapper namespace="mapper.cart">
-	<!-- 리절트 맵 정의 -->
-	<resultMap id="cartResult" type="CartVO">
+<mapper namespace="mapper.cart"> <!-- 다른 파일의 SQL문과 구별하기 위해 mapper.cart로 네임스페이스 지정 -->
+	
+<!-- src 패키지 아래에 cart.xml은 /mybatis/mappers 패키지에 위치 -->
+
+<!-- 카트 정보를 저장할 resultMap 정의 -->
+	<resultMap id="cartResult" type="CartVO"> <!-- src 패키지 아래에 cart.xml은 /mybatis/mappers 패키지에 위치 -->
 		<result property="cart_id" column="cart_id" />
 		<result property="goods_id" column="goods_title" />
 		<result property="member_id" column="member_id" />
@@ -33,14 +36,21 @@
 		<result property="goods_writer_intro" column="goods_writer_intro" />
 		<result property="goods_contents_order" column="goods_contents_order" />
 		<result property="goods_intro" column="goods_intro" />
-	</resultMap>
+	</resultMap> <!-- 장바구니 페이지에 표시할 상품 정보를 저장할 resultMap -->
+	
+	<!-- SQL문의 >, <, <=, >= 같은 연산자들은 XML 파일에서 작성하면 연산자가 아닌 특수 문자로 인식하므로 오류 발생 -->
+	<!-- 이러한 연산자들도 SQL문의 일부라는 것을 알려주기 위해 <![CDATA[ ... ]]> 태그로 작성해야 한다. -->
+	
+	<!--
+		상품 번호를 이용해 장바구니에 상품을 추가하기 전인지 혹은 이미 추가된 상품인지를 체크
+	-->
 
 	<select id="selectCartList"  parameterType="cartVO"  resultMap="cartResult"   >
 	    <![CDATA[
 		select * from t_shopping_cart 
 		where member_id=#{member_id} 
 		]]>
-	</select>
+	</select> <!-- 모든 장바구니 조회 -->
 
 	<select id="selectGoodsList" resultMap="goodsResult" parameterType="java.util.Map">
       <![CDATA[
@@ -53,7 +63,7 @@
 			#{item.goods_id}
 		</foreach>
 		order by g.goods_creDate desc
-	</select>
+	</select> <!-- 장바구니 테이블에 등록된 사움 번호를 이용해 상품 정보를 조회 -->
 
 	<select id="selectCountInCart" resultType="String" parameterType="cartVO">
 	    <![CDATA[
@@ -62,7 +72,7 @@
 			  and member_id=#{member_id} 
 
     	]]>
-	</select>
+	</select> <!-- 장바구니 테이블에 추가하기 전에 그 상품 번호가 장바구니에 담겨 있는지 조회 -->
 
 	<insert id="insertGoodsInCart" parameterType="cartVO">
 	    <![CDATA[
@@ -73,7 +83,7 @@
     							        #{goods_id},
     							        #{member_id})
     	]]>
-	</insert>
+	</insert> <!-- 상품을 추가 -->
 
 	<update id="updateCartGoodsQty" parameterType="cartVO">
 	    <![CDATA[

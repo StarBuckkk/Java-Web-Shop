@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import com.spring.member.vo.MemberVO;
 
-@Repository("memberDAO")
+@Repository("memberDAO") // id가 memberDAO인 빈을 자동 생성
 public class MemberDAOImpl implements MemberDAO {
 	@Autowired
-	private SqlSession sqlSession;
+	private SqlSession sqlSession; // XML 설정 파일에서 생성한 ID가 sqlSession인 빈을 자동 주입
 
 	@Override
 	public List selectAllMemberList() throws DataAccessException {

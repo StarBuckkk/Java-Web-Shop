@@ -18,22 +18,22 @@
 <div class="main_book">
    <c:set  var="goods_count" value="0" />
 	<h3>베스트셀러</h3>
-	<c:forEach var="item" items="${goodsMap.bestseller }">
+	<c:forEach var="item" items="${goodsMap.bestseller }"> <%-- 베스트셀러를 표시 --%>
 	   <c:set  var="goods_count" value="${goods_count+1 }" />
 		<div class="book">
-			<a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
+			<a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }"> <%-- 이미지 클릭 시 상품 상세 페이지로 넘어감 --%>
 			<img class="link"  src="${contextPath}/resources/image/1px.gif"> 
 			</a> 
 				<img width="121" height="154" 
-				     src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}">
-
+				     src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}"> <%-- 썸네일 이미지를 표시 --%>
+				     
 			<div class="title">${item.goods_title }</div>
 			<div class="price">
 		  	   <fmt:formatNumber  value="${item.goods_price}" type="number" var="goods_price" />
 		          ${goods_price}원
 			</div>
 		</div>
-	   <c:if test="${goods_count==15   }">
+	   <c:if test="${goods_count==15   }"> <%-- 베스트셀러 15개 이상이면 16번째 이미지에는 more를 표시 --%>
          <div class="book">
            <font size=20> <a href="#">more</a></font>
          </div>

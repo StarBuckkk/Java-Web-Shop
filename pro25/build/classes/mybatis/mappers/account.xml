@@ -8,19 +8,19 @@
    <update id="updateBalance1" >
       <![CDATA[
          update cust_account
-         set balance=balance-5000000
+         set balance = balance - 5000000
          where
            accountNo = '70-490-930'
        ]]>      
-   </update>  
+   </update> <!-- 잔고를 50000000원 감액 -->
 
    <update id="updateBalance2" >
       <![CDATA[
          update cust_account
-         set balance=balance+5000000
+         set balance = balance + 5000000
          where
           accountNo ='70-490-911'
        ]]>      
-   </update>  
+   </update> <!-- 잔고를 50000000원 송금 -->
    
 </mapper>

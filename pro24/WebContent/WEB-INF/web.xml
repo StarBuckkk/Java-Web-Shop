@@ -11,7 +11,7 @@
 	<context-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>
-          /WEB-INF/config/action-mybatis.xml
+          /WEB-INF/config/action-mybatis.xml <!-- 마이바티스 설정을 불러들임 -->
           /WEB-INF/config/action-service.xml
       </param-value>
    </context-param>

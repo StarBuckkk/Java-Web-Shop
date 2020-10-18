@@ -11,19 +11,19 @@
 <script>
   $(function() {
       $("#checkJson").click(function() {
-      	var article = {articleNO:"114", 
+      	var article = {articleNO:"114", // 새 글 정보를 json으로 생성
 	               writer:"박지성",
 	               title:"안녕하세요", 
 	               content:"상품 소개 글입니다."
 	              };
   
-  	$.ajax({
-  	    //type:"POST",
-        //url:"${contextPath}/boards",
-        type:"PUT",
-        url:"${contextPath}/boards/114",
+  	$.ajax({ // Ajax 요청 시 type 속성에는 메서드의 속성을 지정하고, url 속성에는 REST에서 지정한 uri 형식으로 요청하도록 지정
+  	    //type:"POST", // 새 글 등록은 post 방식으로 요청
+        //url:"${contextPath}/boards", // 새 글을 등록하는 메서드를 호출
+        type:"PUT", // 수정
+        url:"${contextPath}/boards/114", //  글 번호 114번에 대해 요청
         contentType: "application/json",
-        data :JSON.stringify(article),
+        data :JSON.stringify(article), // 글 정보를 json 형식으로 전송
       success:function (data,textStatus){
           alert(data);
       },

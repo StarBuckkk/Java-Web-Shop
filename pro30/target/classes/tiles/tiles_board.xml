@@ -3,14 +3,14 @@
 "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
-	<definition name="/board/listArticles" extends="baseLayout">
+	<definition name="/board/listArticles" extends="baseLayout"> <!-- /board/listArticles 요청에 대해 같은 경로의 listArticles.jsp를 표시 / tiles_member.xml의 기본 레이아웃을 상속받음-->
 	      <put-attribute name="title" value="글목록창" />
 	      <put-attribute name="body" value="/WEB-INF/views/board/listArticles.jsp" />
 	</definition>
 	
 	<definition name="/board/articleForm" extends="baseLayout">
 		<put-attribute name="title" value="글쓰기창" />
-		<put-attribute name="body" value="/WEB-INF/views/board/articleForm.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/board/articleForm.jsp" /> <!-- /board/articleForm 요청에 대해 글쓰기창을 나타냄 -->
 	</definition>
 	
 	<definition name="/board/viewArticle" extends="baseLayout">

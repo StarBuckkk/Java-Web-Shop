@@ -12,8 +12,8 @@ import com.spring.member.vo.MemberVO;
 /*@Transactional(propagation=Propagation.REQUIRED) */
 public class MemberServiceImpl  implements MemberService{
 	   private MemberDAO memberDAO;
-	   public void setMemberDAO(MemberDAO memberDAO){
-	      this.memberDAO = memberDAO;
+	   public void setMemberDAO(MemberDAO memberDAO) {
+	      this.memberDAO = memberDAO; // memberDAO 속성에 setter 를 이용하여 설정 파일에서 생성된 memberDAO 빈을 주입
 	   }
 
 	   @Override

@@ -9,18 +9,19 @@
 <script>
 	var array_index=0;
 	var SERVER_URL="${contextPath}/thumbnails.do";
-	function fn_show_next_goods(){
+	function fn_show_next_goods(){ // 빠른 메뉴의 다음 클릭 시 <hidden> 태그에 저장된 상품 정보를 가져와 이미지를 표시
 		var img_sticky=document.getElementById("img_sticky");
 		var cur_goods_num=document.getElementById("cur_goods_num");
 		var _h_goods_id=document.frm_sticky.h_goods_id;
 		var _h_goods_fileName=document.frm_sticky.h_goods_fileName;
-		if(array_index <_h_goods_id.length-1)
+		
+		if(array_index <_h_goods_id.length-1) // 다음 클릭 시 배열의 인덱스를 1 증가시킴
 			array_index++;
 		 	
 		var goods_id=_h_goods_id[array_index].value;
 		var fileName=_h_goods_fileName[array_index].value;
 		img_sticky.src=SERVER_URL+"?goods_id="+goods_id+"&fileName="+fileName;
-		cur_goods_num.innerHTML=array_index+1;
+		cur_goods_num.innerHTML=array_index+1; // 증가된 인덱스에 대한 배열 요소의 상품 번호와 이미지 파일 이름을 가져와 표시
 	}
 
 
@@ -96,14 +97,14 @@ function goodsDetail(){
 			</c:when>
 			<c:otherwise>
 	       <form name="frm_sticky"  >	        
-		      <c:forEach var="item" items="${quickGoodsList }" varStatus="itemNum">
+		      <c:forEach var="item" items="${quickGoodsList }" varStatus="itemNum"> <%-- 세션에 저장된 빠른 메뉴 목록의 이미지 정보를 <hidden> 태그에 차례대로 저장 --%>
 		         <c:choose>
 		           <c:when test="${itemNum.count==1 }">
 			      <a href="javascript:goodsDetail();">
 			  	         <img width="75" height="95" id="img_sticky"  
 			                 src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}">
 			      </a>
-			        <input type="hidden"  name="h_goods_id" value="${item.goods_id}" />
+			        <input type="hidden"  name="h_goods_id" value="${item.goods_id}" /> <%-- 동일한 <hidde> 태그에 연속해서 자장하면 배열로 저장 --%>
 			        <input type="hidden" name="h_goods_fileName" value="${item.goods_fileName}" />
 			      <br>
 			      </c:when>

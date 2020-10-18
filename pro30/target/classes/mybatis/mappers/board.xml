@@ -3,8 +3,8 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mapper.board">
-<resultMap id="articlesResult" type="articleVO">
+<mapper namespace="mapper.board"> <!-- 다른 파일의 SQL문과 구별하기 위해 mapper.board로 네임스페이스 지정 -->
+<resultMap id="articlesResult" type="articleVO"> <!-- 글 정보를 저장할 resultMap을 설정 -->
     <result property="level" column="level" />
     <result property="articleNO" column="articleNO" />
     <result property="parentNO" column="parentNO" />
@@ -18,9 +18,9 @@
 	  <result property="imageFileNO" column="imageFileNO" />
 	  <result property="articleNO" column="articleNO" />
 	  <result property="imageFileName" column="imageFileName" />
- </resultMap>
+ </resultMap> <!-- 이미지 파일 테이블에서 조회한 레코드를 저장하는 resultMap을 설정 -->
 
-  <select id="selectAllArticlesList" resultMap="articlesResult"   >
+  <select id="selectAllArticlesList" resultMap="articlesResult"   > <!-- DAO에서 id를 이용해 해당 SQL문을 호출하고 반환되는 레코드를 articlesResult에 저장-->
     <![CDATA[
       SELECT level, articleNO, parentNO, title, content, writeDate, imageFileName, id
       from t_board
@@ -28,41 +28,44 @@
       CONNECT BY PRIOR articleNO=parentNO 
       ORDER SIBLINGS BY articleNO DESC		
     ]]>
-  </select>
+	<!-- 모든 글을 조회하는 계층현 SQL문 -->
+  </select><!-- SQL문의 >, <, <=, >= 같은 연산자들은 XML 파일에서 작성하면 연산자가 아닌 특수 문자로 인식하므로 오류 발생 -->
+	<!-- 이러한 연산자들도 SQL문의 일부라는 것을 알려주기 위해 <![CDATA[ ... ]]> 태그로 작성해야 한다. -->
   
 	<!--단일이미지 추가  -->
-	 
-  <insert id="insertNewArticle"  parameterType="java.util.Map">
+	<!--
+	<insert id="insertNewArticle"  parameterType="java.util.Map"> // BoardDAO에서 회원 정보를 boardVO의 속성에 저장해서 넘김
 		<![CDATA[
 			INSERT into t_board(articleNO,  title, content, imageFileName, id)
 			VALUES(#{articleNO},#{title},	#{content}, #{imageFileName},	#{id})
 		]]>      
-	</insert>
+	</insert> // boardVO의 속성 이름에 저장된 값을 value로 설정
+	-->
 	
   <select id="selectNewArticleNO" resultType="int"  >
 		<![CDATA[
 			SELECT  nvl(max(articleNO), 0) + 1 from t_board		
 		]]>
-	</select>
+	</select> <!-- 추가하는 새 글에 대한 글 번호를 가져옴 -->
 	
   <select id="selectArticle" resultType="articleVO"   parameterType="int">
     <![CDATA[
       SELECT * from t_board
       where articleNO = #{articleNO}		
     ]]>
-  </select>
+  </select> <!-- 글 번호에 대해 글 정보를 조회하는 sql문을 추가 -->
   
-  <update id="updateArticle"  parameterType="java.util.Map">
+  <update id="updateArticle"  parameterType="java.util.Map"> <!-- BoardDAO에서 회원 정보를 boardVO의 빈에 설정해 전달 -->
 			update t_board
 			set title=#{title},	 
 			content=#{content}
-			 <if test="imageFileName!='' and imageFileName!=null">
+			 <if test="imageFileName!='' and imageFileName!=null"> <!-- 이미지를 수정한 경우에만 이미지 파일 이름을 수정 -->
 			  , imageFileName=#{imageFileName}
 			</if>
 			where articleNO=#{articleNO}
-	</update>
+	</update> <!-- boardVO 빈의 속성 값을 각 컬럼의 수정 값으로 설정한 후 boardVO 빈의 id 속성 값을 조건 값으로 사용 -->
 	
-	<delete id="deleteArticle"  parameterType="int">
+	<delete id="deleteArticle"  parameterType="int"> <!-- 글번호를 가져옴 -->
     <![CDATA[
       delete from t_board
       where articleNO in (
@@ -73,13 +76,13 @@
   </delete>
 
  <!--다중 이미지 추가 SQL문 -->   
-  <!--
+ 
     <insert id="insertNewArticle"  parameterType="java.util.Map">
     <![CDATA[
       insert into t_board(articleNO, id, title, content, imageFileName)
       values(#{articleNO}, #{id}, #{title}, #{content}, null)
     ]]>      
-  </insert>
+  </insert> <!-- ImageFileName 컬럼은 더 이상 사용하지 않으므로 null을 입력 -->
 
  
    <insert id="insertNewImage"  parameterType="java.util.Map">
@@ -88,14 +91,14 @@
       INTO t_imageFile(imageFileNO, imageFileName, articleNO, regDate)
       VALUES (#{item.imageFileNO}, #{item.imageFileName}, #{item.articleNO}, sysdate)
     </foreach>
-  </insert>
- -->
+  </insert> <!-- 한꺼번에 여러 개의 레코드를 추가 -->
+ 
  
   <select id="selectNewImageFileNO" resultType="int"  >
     <![CDATA[
       SELECT  nvl(max(imageFileNO),0) from t_imageFile		
     ]]>
-  </select>
+  </select> <!-- 새로 추가할 이미지 정보의 이미지 번호를 가져옴 -->
 	
 
   <select  id="selectImageFileList" resultMap="imgResult" parameterType="int">
@@ -103,6 +106,6 @@
       SELECT * from t_imageFile
       where articleNO=#{articleNO}	
     ]]>
-  </select> 
+  </select> <!-- 이미지 테이블에서 글 번호에 대한 이미지 파일 정보를 조회 -->
   
 </mapper>

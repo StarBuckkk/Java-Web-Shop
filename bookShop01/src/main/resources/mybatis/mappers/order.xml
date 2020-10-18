@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!-- 각 설정 파일은 src 패키지 아래에 위치해야 한다. -->
 
-<mapper namespace="mapper.order">
-<!-- 리절트 맵 정의 -->	
+<mapper namespace="mapper.order"> <!-- 다른 파일의 SQL문과 구별하기 위해 mapper.order로 네임스페이스 지정 -->
+
+<!-- src 패키지 아래에 order.xml은 /mybatis/mappers 패키지에 위치 -->
+
+<!-- 주문 정보를 저장할 resultMap을 정의 -->		
 	<resultMap id="orderGoodsResult" type="OrderVO">
 	    <result property="order_seq_num" column="order_seq_num" />
 		<result property="order_id" column="order_id" />
@@ -42,6 +45,9 @@
 		<result property="goods_fileName" column="goods_fileName" />
 	</resultMap>
 	
+	<!-- SQL문의 >, <, <=, >= 같은 연산자들은 XML 파일에서 작성하면 연산자가 아닌 특수 문자로 인식하므로 오류 발생 -->
+	<!-- 이러한 연산자들도 SQL문의 일부라는 것을 알려주기 위해 <![CDATA[ ... ]]> 태그로 작성해야 한다. -->
+	
 	 <select id="selectMyOrderList" resultMap="orderGoodsResult"  parameterType="orderVO"  >
 	    <![CDATA[
 			select * from t_shopping_order
@@ -50,10 +56,15 @@
         	order by pay_order_time desc
 		]]>
 	</select>
+	
+	<!-- selectkey 태그를 이용하면 주문상품일련번호를 가져오는 SQL문을 따로 실행하지 않아도 된다. -->
+
 	<insert id="insertNewOrder" parameterType="orderVO"  >
+	<!-- 시퀸스에서 주문상품일련번호를 가져와 주문테이블에 추가할 수 있다 -->
 	    <selectKey resultType="int" keyProperty="order_seq_num" order="BEFORE">
 	    	select order_seq_num.nextval from dual
-	    </selectKey>
+	    </selectKey> <!-- keyProperty는 결괏값을 받는 컬럼 이름을 의미 order는 selectKey 태그를 포함하는 -->
+		<!-- 부모 SQL문이 있는 경우 부모 SQL문을 실행하기 전 또는 후에 실행할지의 여부 지정 : AFTER로 지정할 경우 부모 SQL문을 실행한 후 수행 -->
 	    <![CDATA[
 			insert into t_shopping_order(order_seq_num,
 			                            order_id,
@@ -106,13 +117,13 @@
 						                #{orderer_hp},
 						                #{pay_orderer_hp_num})
     	]]>
-	</insert>
+	</insert> <!-- <select > 태그를 이용해서 가져온 주문상품 일련번호를 사용 -->
 
    <select id="selectOrderID" resultType="int"  >
 	    <![CDATA[
 		    select seq_order_id.nextval from dual
     	]]>
-	</select>
+	</select> <!-- 주문번호를 가져옴 -->
 	
 	<select id="selectMyOrder" resultMap="orderGoodsResult"   parameterType="String"  >
 	    <![CDATA[

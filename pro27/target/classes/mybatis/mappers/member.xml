@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!-- 각 설정 파일은 src 패키지 아래에 위치해야 한다. -->
 
-<mapper namespace="mapper.member">
+<mapper namespace="mapper.member"> <!-- 다른 파일의 SQL문과 구별하기 위해 mapper.member로 네임스페이스 지정 -->
 	<resultMap id="memResult" type="memberVO">
-		<result property="id" column="id" />
-        <result property="pwd" column="pwd" />
+		<result property="id" column="id" /> <!-- src 패키지 아래에 member.xml은 /mybatis/mappers 패키지에 위치 -->
+        <result property="pwd" column="pwd" /> <!-- 레코드의 컬럼 이름에 대해 memberVO 같은 속성에 값을 설정 -->
         <result property="name" column="name" />
         <result property="email" column="email" />
         <result property="joinDate" column="joinDate" />
@@ -21,40 +21,42 @@
    </resultMap> -->
 
 
-	<select id="selectAllMemberList" resultMap="memResult">
+	<select id="selectAllMemberList" resultMap="memResult"> <!-- DAO에서 id를 이용해 해당 SQL문을 호출하고 반환되는 레코드를 memResult에 저장-->
       <![CDATA[
          select * from t_member	order by joinDate desc	 	
       ]]>
-	</select>
+	</select> <!-- SQL문의 >, <, <=, >= 같은 연산자들은 XML 파일에서 작성하면 연산자가 아닌 특수 문자로 인식하므로 오류 발생 -->
+	<!-- 이러한 연산자들도 SQL문의 일부라는 것을 알려주기 위해 <![CDATA[ ... ]]> 태그로 작성해야 한다. -->
     
-     <insert id="insertMember"  parameterType="memberVO">
+     <insert id="insertMember"  parameterType="memberVO"> <!-- MemberDAO에서 회원 정보를 memberVO의 속성에 저장해서 넘김 -->
 		<![CDATA[
 		 insert into t_member(id,pwd, name, email)
 		 values(#{id}, #{pwd}, #{name}, #{email})
 		]]>      
-	</insert>
+	</insert> <!-- memberVO의 속성 이름에 저장된 값을 value로 설정 -->
 	
    
-   <update id="updateMember"  parameterType="memberVO">
+   <update id="updateMember"  parameterType="memberVO"> <!-- MemberDAO에서 회원 정보를 memberVO의 빈에 설정해 전달 -->
      <![CDATA[
 	     update t_member
 	     set pwd=#{pwd}, name=#{name}, email=#{email}
 	     where
 	     id=#{id}
       ]]>      
-   </update> 
+   </update> <!-- memberVO 빈의 속성 값을 각 컬럼의 수정 값으로 설정한 후 memberVO 빈의 id 속성 값을 조건 값으로 사용 -->
      
-   <delete id="deleteMember"  parameterType="String">
+   <delete id="deleteMember"  parameterType="String"> <!-- 회원 id는 문자열이므로 parameterType을 String으로 설정 -->
 	<![CDATA[
 	   delete from  t_member
 	   where
 	   id=#{id}
 	]]>      
-  </delete>
+  </delete> <!-- 전달된 id를 조건 값으로 해당 회원 정보를 삭제 -->
+
   <select id="loginById"  resultType="memberVO"   parameterType="memberVO" >
 	<![CDATA[
 		select * from t_member	
 		where id=#{id} and pwd=#{pwd}		
 	]]>
-  </select>
+  </select> <!-- 로그인창에서 입력한 id와 비밀번호로 회원 정보를 조회하는 sql문을 매퍼 파일에 추가 -->
 </mapper>

@@ -11,15 +11,15 @@
 <script>
   $(function() {
       $("#checkJson").click(function() {
-      	var member = { id:"park", 
+      	var member = { id:"park", // 회원 저옵를 JSON으로 생성
   			    name:"박지성",
   			    pwd:"1234", 
   			    email:"park@test.com" };
   	$.ajax({
         type:"post",
-        url:"${contextPath}/test/info",
+        url:"${contextPath}/test/info", // /test/info로 요청
         contentType: "application/json",
-        data :JSON.stringify(member),
+        data :JSON.stringify(member), // 회원 정보를 JSON 문자열로 변환
      success:function (data,textStatus){
      },
      error:function(data,textStatus){

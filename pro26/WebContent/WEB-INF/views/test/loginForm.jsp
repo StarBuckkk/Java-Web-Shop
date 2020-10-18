@@ -15,7 +15,7 @@
 </head>
 
 <body>
-<form   method="post"  action="${contextPath}/test/login.do">
+<form   method="post"  action="${contextPath}/test/login.do"> <%-- 로그인 클릭 시 /test/login.do로 요청 --%>
     <!-- <input  type="hidden"  name="email" value="hong@test.com" /> -->
 	<table width="400">
 		<tr>

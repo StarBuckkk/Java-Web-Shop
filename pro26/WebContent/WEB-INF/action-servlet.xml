@@ -12,12 +12,12 @@ http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-      <property name="prefix" value="/WEB-INF/views/test/" />
+      <property name="prefix" value="/WEB-INF/views/test/" /> <!-- URL 요청명에 대해/WEB-INF views 폴더의 JSP를 선택 -->
     <!--   <property name="prefix" value="/WEB-INF/views/member/" /> -->
       <property name="suffix" value=".jsp"/>
    </bean>
 
-   <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
-  <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
-   <context:component-scan base-package="com.spring"/>
+   <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/> <!-- 클래스 레벨에 @RequestMapping을 처리 -->
+  <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/> <!-- 메서드 레벨에 @RequestMapping을 처리 -->
+   <context:component-scan base-package="com.spring"/> <!-- com.spring 패키지에 존재하는 클래스에 애너테이션이 적용되도록 설정 -->
 </beans>

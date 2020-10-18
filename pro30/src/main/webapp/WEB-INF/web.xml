@@ -22,7 +22,7 @@
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/action-mybatis.xml</param-value>
+		<param-value>/WEB-INF/spring/action-mybatis.xml</param-value> <!-- web.xml에서 root-context.xml 대신 action-mybatis.xml로 수정 -->
 	</context-param>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -36,7 +36,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value> <!-- 스프링 실행 시 servlet-context.xml의 설정 정보를 읽어 들임 -->
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

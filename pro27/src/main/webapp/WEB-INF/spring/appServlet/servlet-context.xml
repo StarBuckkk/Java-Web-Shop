@@ -17,34 +17,38 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/resources/**" location="/resources/" /> <!-- jsp에서 사용될 자바스크립트나 이미지 파일 경로를 지정 -->
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
 	
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
+	<!-- JSP 뷰리졸버
+	
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" /> 
 		<beans:property name="suffix" value=".jsp" /> 
 	</beans:bean>
-  <context:component-scan	base-package="com.myspring.pro27" />
+	
+	-->
 
 <!-- 타일즈 실습 설정 -->
- <!-- 
+  
  
-    <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+    <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer"> <!-- 스프링의 TilesConfigurer 클래스를 이용해 tilesConfigurer 빈 생성 -->
 		<beans:property name="definitions">
 			<beans:list>
-				<beans:value>classpath:tiles/*.xml</beans:value>
+				<beans:value>classpath:tiles/*.xml</beans:value> <!-- 패키지 tiles의 모든 설정 xml 파일을 읽어 들임 -->
 			</beans:list>
 		</beans:property>
 		<beans:property name="preparerFactoryClass"
 			          value="org.springframework.web.servlet.view.tiles2.SpringBeanPreparerFactory" />
 	</beans:bean>
 	<beans:bean id="viewResolver"
-		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver"> <!-- 타일즈 뷰리졸버를 사용해 화면을 표시 -->
 		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
 	</beans:bean>
--->
+
+
 <!-- 인터셉터 실습 설정 -->
 <!--     
     
@@ -55,4 +59,6 @@
 	</mvc:interceptor>
 </mvc:interceptors>
  -->
+ 
+ <context:component-scan	base-package="com.myspring.pro27" />
 </beans:beans>

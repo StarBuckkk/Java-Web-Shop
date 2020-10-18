@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> <!-- 다음에서 제공하는 주소 검색을 사용하기 위해 포함 -->
 <script>
 
 
@@ -39,7 +39,7 @@ function execDaumPostcode() {
         fullRoadAddr += extraRoadAddr;
       }
 
-      // 우편번호와 주소 정보를 해당 필드에 넣는다.
+      // 우편번호와 주소 정보를 해당 필드에 넣는다. / 저번 주소와 도로명 주소를 텍스트 창에 표시
       document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
       document.getElementById('roadAddress').value = fullRoadAddr;
       document.getElementById('jibunAddress').value = data.jibunAddress;

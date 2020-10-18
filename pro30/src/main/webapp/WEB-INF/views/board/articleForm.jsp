@@ -28,7 +28,7 @@
   }
   
   var cnt=1;
-  function fn_addFile(){
+  function fn_addFile(){ // 파일 업로드 기능을 동적으로 추가
 	  $("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
 	  cnt++;
   }  
@@ -42,7 +42,7 @@
     <table border="0" align="center">
       <tr>
 					<td align="right"> 작성자</td>
-					<td colspan=2  align="left"><input type="text" size="20" maxlength="100"  value="${member.name }" readonly/> </td>
+					<td colspan=2  align="left"><input type="text" size="20" maxlength="100"  value="${member.name }" readonly/> </td> <%-- 로그인하면 작성자의 이름 표시 --%>
 			</tr>
 	     <tr>
 			   <td align="right">글제목: </td>
@@ -59,7 +59,7 @@
 			  
 			  
 			  <td align="right">이미지파일 첨부</td>
-				<td align="left"> <input type="button" value="파일 추가" onClick="fn_addFile()"/></td>
+				<td align="left"> <input type="button" value="파일 추가" onClick="fn_addFile()"/></td> <!-- 클릭하면 <div>에 동적으로 파일 업로드가 추가 -->
 				
 				
 	   </tr>

@@ -3,23 +3,23 @@
 "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
-   <definition name="baseLayout"  template="/WEB-INF/views/common/layout.jsp">
+   <definition name="baseLayout"  template="/WEB-INF/views/common/layout.jsp"> <!-- 공통 레이아웃의 뷰이름을 지정 / 전체 라이아웃을 정하는 jsp의 위치를 지정 -->
       <put-attribute name="title" value="" />
-      <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
-      <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" /> <!-- 레이아웃에서 header(헤더)를 구성하는 jsp의 위치를 지정 -->
+      <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" /> <!-- 레이아웃에서 사이드 메뉴를 구성하는 jsp의 위치를 지정 -->
       <put-attribute name="body" value="" />
-      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" /> <!-- footer(하단)을 구성하는 jsp의 위치 설정 -->
    </definition>
 
    <definition name="main" extends="baseLayout">
       <put-attribute name="title" value="메인페이지" />
-      <put-attribute name="body" value="/WEB-INF/views/main.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/main.jsp" /> <!-- jsp 지정 -->
    </definition>
 
 
-   <definition name="/member/listMembers" extends="baseLayout">
-      <put-attribute name="title" value="회원목록창" />
-      <put-attribute name="body" value="/WEB-INF/views/member/listMembers.jsp" />
+   <definition name="/member/listMembers" extends="baseLayout"> <!-- 컨트롤러에서 반환되는 뷰이름을 지정 / 기본 레이아웃을 상속받음 -->
+      <put-attribute name="title" value="회원목록창" /> <!-- jsp 페이지의 제목을 지정 -->
+      <put-attribute name="body" value="/WEB-INF/views/member/listMembers.jsp" /> <!-- 레이아웃 페이지의 본무넹 표시할 jsp를 지정 -->
    </definition>
    
 
