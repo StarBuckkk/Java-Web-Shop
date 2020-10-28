@@ -10,17 +10,14 @@
 <script  type="text/javascript">
 function fn_modify_order_state(order_id){
 	var s_delivery_state=document.getElementById("s_delivery_state");
-    var index = s_delivery_state.selectedIndex;   //선택한 옵션의 인덱스를 구합니다.
-    var value = s_delivery_state[index].value;    //선택한 옵션의 값을 구합니다.
+    var index = s_delivery_state.selectedIndex;   // 함수로 전달받은 셀렉트 박스에서 선택한 옵션의 인덱스로 선택한 배송 상태 값을 가져옴
+    var value = s_delivery_state[index].value;    
 	console.log("value: " +value);
 	$.ajax({
 		type : "post",
 		async : false, //false인 경우 동기식으로 처리한다.
 		url : "${contextPath}/admin/order/modifyDeliveryState.do",
-		data : {
-			order_id:order_id,
-			'delivery_state':value
-		},
+		data : { order_id:order_id, 'delivery_state':value }, // 주문 번호와 배송 상태 값을 컨트롤러로 전송
 		success : function(data, textStatus) {
 			if(data.trim()=='mod_success'){
 				alert("주문 정보를 수정했습니다.");
@@ -243,7 +240,7 @@ function fn_modify_order_state(order_id){
 				  <input  type="hidden" name="h_delivery_state" value="${deliveryInfo.delivery_state }" />
 				</td>
 				<td width=10%>
-			     <input  type="button" value="배송수정"  onClick="fn_modify_order_state('${deliveryInfo.order_id}')"/>
+			     <input  type="button" value="배송수정"  onClick="fn_modify_order_state('${deliveryInfo.order_id}')"/> <%-- 배송수정을 클릭하면 셀렉트 박스의 id를 전달 --%>
 			    </td>
 				</tr>
 				

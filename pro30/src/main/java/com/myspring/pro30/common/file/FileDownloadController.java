@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class FileDownloadController {
-	private static final String ARTICLE_IMAGE_REPO = "C:\\board\\article_image"; // 파일 저장 위치를 지정
+	//private static final String ARTICLE_IMAGE_REPO = "C:\\board\\article_image"; // 파일 저장 위치를 지정
+	private static final String ARTICLE_IMAGE_REPO = "/var/lib/tomcat9/webapps/board/article_image"; // 파일 저장 위치를 지정 AWS
 	@RequestMapping("/download.do")
 	protected void download(@RequestParam("imageFileName") String imageFileName, // 이미지 파일 이름을 바로 설정
 							@RequestParam("articleNO") String articleNO,
 			                 HttpServletResponse response)throws Exception { // 다운로드할 이미지 파일 이름을 전달
 		OutputStream out = response.getOutputStream();
-		String downFile = ARTICLE_IMAGE_REPO + "\\" + articleNO +"\\"+ imageFileName; // 글 번호와 파일 이름으로 다운로드할 파일 경로를 설정
+		String downFile = ARTICLE_IMAGE_REPO + "/" + articleNO + "/" + imageFileName; // 글 번호와 파일 이름으로 다운로드할 파일 경로를 설정
 		File file = new File(downFile); // 다운로드할 파일 객체를 생성
 
 		response.setHeader("Cache-Control", "no-cache");
@@ -42,3 +43,4 @@ public class FileDownloadController {
 	}
 
 }
+

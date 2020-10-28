@@ -17,14 +17,14 @@ import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 public class FileDownloadController {
-	private static String CURR_IMAGE_REPO_PATH = "C:\\shopping\\file_repo"; // 파일 저장 위치를 지정
+	private static String CURR_IMAGE_REPO_PATH = "/var/lib/tomcat9/webapps/shopping/file_repo"; // 파일 저장 위치를 지정
 	
 	@RequestMapping("/download")
 	protected void download(@RequestParam("fileName") String fileName, // 이미지 파일 이름과 상품 id를 가져옴
 		                 	@RequestParam("goods_id") String goods_id,
 			                 HttpServletResponse response) throws Exception {
 		OutputStream out = response.getOutputStream();
-		String filePath = CURR_IMAGE_REPO_PATH + "\\" + goods_id + "\\" + fileName; // 상품 id와  파일 이름으로 다운로드할 파일 경로를 설정
+		String filePath = CURR_IMAGE_REPO_PATH + "/" + goods_id + "/" + fileName; // 상품 id와  파일 이름으로 다운로드할 파일 경로를 설정
 		File image = new File(filePath); // 다운로드할 파일 객체를 생성
 
 		response.setHeader("Cache-Control", "no-cache");
@@ -50,7 +50,7 @@ public class FileDownloadController {
                             	@RequestParam("goods_id") String goods_id,
 			                 HttpServletResponse response) throws Exception {
 		OutputStream out = response.getOutputStream();
-		String filePath = CURR_IMAGE_REPO_PATH + "\\" + goods_id + "\\" + fileName;
+		String filePath = CURR_IMAGE_REPO_PATH + "/" + goods_id + "/" + fileName;
 		File image = new File(filePath);
 		
 		if (image.exists() ) { 

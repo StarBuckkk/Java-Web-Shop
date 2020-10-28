@@ -125,19 +125,16 @@ function  calcPeriod(search_period){
 }
 
 function fn_modify_order_state(order_id,select_id){
-	var s_delivery_state=document.getElementById(select_id);
-    var index = s_delivery_state.selectedIndex;
+	var s_delivery_state=document.getElementById(select_id); // 주문 상태를 나타내는 셀렉트 박스에 접근
+    var index = s_delivery_state.selectedIndex; // 함수로 전달받은 셀렉트 박스에서 선택한 옵션의 인덱스로 배송 상태 값을 가져옴
     var value = s_delivery_state[index].value;
     //console.log("value: "+value );
 	 
 	$.ajax({
 		type : "post",
-		async : false,
+		async : false, //false인 경우 동기식으로 처리한다.
 		url : "${contextPath}/admin/order/modifyDeliveryState.do",
-		data : {
-			order_id:order_id,
-			"delivery_state":value
-		},
+		data : { order_id:order_id, "delivery_state":value }, // 주문 번호와 배송 상태 값을 컨트롤러로 전송
 		success : function(data, textStatus) {
 			if(data.trim()=='mod_success'){
 				alert("주문 정보를 수정했습니다.");
@@ -484,7 +481,7 @@ function fn_detail_search(){
 		     </tr>
 	 </c:when>
 	 <c:otherwise>
-     <c:forEach var="item" items="${newOrderList}" varStatus="i">
+     <c:forEach var="item" items="${newOrderList}" varStatus="i"> <%-- 주문 상품 목록을 리스트로 표시 --%>
         <c:choose>
           <c:when test="${item.order_id != pre_order_id }">  
             <c:choose>
@@ -522,6 +519,16 @@ function fn_detail_search(){
 				</td>
 				<td width=10%>
 				 <select name="s_delivery_state${i.index }"  id="s_delivery_state${i.index }">
+				 
+				 <%-- 
+				 	쇼핑몰 주문 테이블의 배송 상태를 나타내는 delivery_state 칼럼의 값들
+				 	delivery_prepared : 배송준비중
+				 	delivering : 배송중
+				 	finished_delivering : 배송완료
+				 	cancel_order : 주문취소
+				 	returning_goods : 반품
+				 --%>
+				 
 				 <c:choose>
 				   <c:when test="${item.delivery_state=='delivery_prepared' }">
 				     <option  value="delivery_prepared" selected>배송준비중</option>
@@ -558,11 +565,11 @@ function fn_detail_search(){
 				     <option  value="cancel_order" >주문취소</option>
 				     <option  value="returning_goods" selected>반품</option>
 				   </c:when>
-				   </c:choose>
+				   </c:choose> <%-- 각 주문 상품에 대한 셀렉트 박스에 현재 주문 상태를 초기 값으로 설정 --%>
 				 </select> 
 				</td>
 				<td width=10%>
-			     <input  type="button" value="배송수정"  onClick="fn_modify_order_state('${item.order_id}','s_delivery_state${i.index}')"/>
+			     <input  type="button" value="배송수정"  onClick="fn_modify_order_state('${item.order_id}','s_delivery_state${i.index}')"/> <%-- 배송수정을 클릭하면 선택한 셀렉트 박스의 id를 함수로 전달 --%>
 			    </td>
 			</tr>
 		</c:when>

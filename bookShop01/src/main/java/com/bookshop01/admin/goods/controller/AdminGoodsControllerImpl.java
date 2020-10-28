@@ -38,7 +38,8 @@ import com.bookshop01.member.vo.MemberVO;
  * */
 
 public class AdminGoodsControllerImpl extends BaseController  implements AdminGoodsController {
-	private static final String CURR_IMAGE_REPO_PATH = "C:\\shopping\\file_repo"; // 파일 저장 위치
+	//private static final String CURR_IMAGE_REPO_PATH = "C:\\shopping\\file_repo"; // 파일 저장 위치
+	private static final String CURR_IMAGE_REPO_PATH = "/var/lib/tomcat9/webapps/shopping/file_repo"; // 파일 저장 위치
 	@Autowired
 	private AdminGoodsService adminGoodsService;
 	
@@ -139,8 +140,8 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 				
 				for(ImageFileVO  imageFileVO:imageFileList) {
 					imageFileName = imageFileVO.getFileName();
-					File srcFile = new File(CURR_IMAGE_REPO_PATH + "\\" + "temp" + "\\" + imageFileName);
-					File destDir = new File(CURR_IMAGE_REPO_PATH + "\\" + goods_id);
+					File srcFile = new File(CURR_IMAGE_REPO_PATH + "/" + "temp" + "/" + imageFileName);
+					File destDir = new File(CURR_IMAGE_REPO_PATH + "/" + goods_id);
 					FileUtils.moveFileToDirectory(srcFile, destDir, true);
 				}
 			}
@@ -153,7 +154,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 			if(imageFileList != null && imageFileList.size()!=0 ) {
 				for(ImageFileVO  imageFileVO:imageFileList) {
 					imageFileName = imageFileVO.getFileName();
-					File srcFile = new File(CURR_IMAGE_REPO_PATH + "\\" + "temp" + "\\" + imageFileName);
+					File srcFile = new File(CURR_IMAGE_REPO_PATH + "/" + "temp" + "/" + imageFileName);
 					srcFile.delete();
 				}
 			}
@@ -241,8 +242,8 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 			    
 				for(ImageFileVO  imageFileVO:imageFileList) {
 					imageFileName = imageFileVO.getFileName();
-					File srcFile = new File(CURR_IMAGE_REPO_PATH + "\\" + "temp" + "\\" + imageFileName);
-					File destDir = new File(CURR_IMAGE_REPO_PATH + "\\" + goods_id);
+					File srcFile = new File(CURR_IMAGE_REPO_PATH + "/" + "temp" + "/" + imageFileName);
+					File destDir = new File(CURR_IMAGE_REPO_PATH + "/" + goods_id);
 					FileUtils.moveFileToDirectory(srcFile, destDir, true);
 				}
 			}
@@ -251,7 +252,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 				
 				for(ImageFileVO  imageFileVO:imageFileList) {
 					imageFileName = imageFileVO.getFileName();
-					File srcFile = new File(CURR_IMAGE_REPO_PATH + "\\" + "temp" + "\\" + imageFileName);
+					File srcFile = new File(CURR_IMAGE_REPO_PATH + "/" + "temp" + "/" + imageFileName);
 					srcFile.delete();
 				}
 			}
@@ -298,8 +299,8 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 			    
 				for(ImageFileVO  imageFileVO:imageFileList) {
 					imageFileName = imageFileVO.getFileName();
-					File srcFile = new File(CURR_IMAGE_REPO_PATH + "\\" + "temp" + "\\" + imageFileName);
-					File destDir = new File(CURR_IMAGE_REPO_PATH + "\\" + goods_id);
+					File srcFile = new File(CURR_IMAGE_REPO_PATH + "/" + "temp" + "/" + imageFileName);
+					File destDir = new File(CURR_IMAGE_REPO_PATH + "/" + goods_id);
 					FileUtils.moveFileToDirectory(srcFile, destDir, true);
 				}
 			}
@@ -308,7 +309,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 			if(imageFileList != null && imageFileList.size() !=0 ) {
 				for(ImageFileVO  imageFileVO:imageFileList) {
 					imageFileName = imageFileVO.getFileName();
-					File srcFile = new File(CURR_IMAGE_REPO_PATH+"\\" + "temp" + "\\" + imageFileName);
+					File srcFile = new File(CURR_IMAGE_REPO_PATH+"/" + "temp" + "/" + imageFileName);
 					srcFile.delete();
 				}
 			}
@@ -326,7 +327,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		adminGoodsService.removeGoodsImage(image_id);
 		
 		try{
-			File srcFile = new File(CURR_IMAGE_REPO_PATH + "\\" + goods_id + "\\" + imageFileName);
+			File srcFile = new File(CURR_IMAGE_REPO_PATH + "/" + goods_id + "/" + imageFileName);
 			srcFile.delete();
 		}catch(Exception e) {
 			e.printStackTrace();

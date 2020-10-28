@@ -25,7 +25,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import com.bookshop01.goods.vo.ImageFileVO;
 
 public abstract class BaseController  {
-	private static final String CURR_IMAGE_REPO_PATH = "C:\\shopping\\file_repo"; // 파일 저장 위치
+	private static final String CURR_IMAGE_REPO_PATH = "/var/lib/tomcat9/webapps/shopping/file_repo"; // 파일 저장 위치
 	
 	// 다중 이미지 업로드하기
 	protected List<ImageFileVO> upload(MultipartHttpServletRequest multipartRequest) throws Exception { // 이미지 파일 이름이 저장된 List를 반환
@@ -41,7 +41,7 @@ public abstract class BaseController  {
 			imageFileVO.setFileName(originalFileName);
 			fileList.add(imageFileVO); // 첨부한 이미지 파일의 이름들을 차례대로 저장
 			
-			File file = new File(CURR_IMAGE_REPO_PATH + "\\" + fileName);
+			File file = new File(CURR_IMAGE_REPO_PATH + "/" + fileName);
 			
 			if(mFile.getSize() != 0) { //File Null Check
 				if(! file.exists() ) { //경로상에 파일이 존재하지 않을 경우
@@ -49,14 +49,14 @@ public abstract class BaseController  {
 							file.createNewFile(); //이후 파일 생성
 					}
 				}
-				mFile.transferTo(new File(CURR_IMAGE_REPO_PATH + "\\" + "temp" + "\\" + originalFileName) ); //임시로 저장된 multipartFile을 실제 파일로 전송
+				mFile.transferTo(new File(CURR_IMAGE_REPO_PATH + "/" + "temp" + "/" + originalFileName) ); //임시로 저장된 multipartFile을 실제 파일로 전송
 			}
 		}
 		return fileList;
 	}
 	
 	private void deleteFile(String fileName) {
-		File file = new File(CURR_IMAGE_REPO_PATH + "\\" + fileName);
+		File file = new File(CURR_IMAGE_REPO_PATH + "/" + fileName);
 		try{
 			file.delete();
 		}catch(Exception e){

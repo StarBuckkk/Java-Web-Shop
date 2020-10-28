@@ -35,7 +35,8 @@ import com.myspring.pro30.member.vo.MemberVO;
 
 @Controller("boardController")
 public class BoardControllerImpl  implements BoardController{
-	private static final String ARTICLE_IMAGE_REPO = "C:\\board\\article_image";
+	//private static final String ARTICLE_IMAGE_REPO = "C:\\board\\article_image"; // 파일 저장 위치를 지정 윈도우
+	private static final String ARTICLE_IMAGE_REPO = "/var/lib/tomcat9/webapps/board/article_image"; // 파일 저장 위치를 지정 AWS
 	@Autowired
 	private BoardService boardService;
 	@Autowired
@@ -216,7 +217,7 @@ public class BoardControllerImpl  implements BoardController{
 	
 	try {
 		boardService.removeArticle(articleNO); // 글 번호를 전달해서 삭제
-		File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO);
+		File destDir = new File(ARTICLE_IMAGE_REPO + "/" + articleNO); // 리눅스 경로
 		FileUtils.deleteDirectory(destDir); // 글에 첨부된 이미지 파일이 저장된 폴더도 삭제
 		
 		message = "<script>";
@@ -286,10 +287,10 @@ public class BoardControllerImpl  implements BoardController{
 			
 			for(ImageVO  imageVO:imageFileList) { // 첨부한 이미지들을 for문을 이용해 업로드
 				imageFileName = imageVO.getImageFileName();
-				File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
-				File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO);
-				//destDir.mkdirs();
-				FileUtils.moveFileToDirectory(srcFile, destDir, true);
+				File srcFile = new File(ARTICLE_IMAGE_REPO + "/" + "temp" + "/" + imageFileName);
+				File destDir = new File(ARTICLE_IMAGE_REPO + "/" + articleNO);
+				//destDir.mkdirs(); // AWS 실험 때문에 주석해제
+				FileUtils.moveFileToDirectory(srcFile, destDir, true); 
 			}
 		}
 		    
@@ -305,7 +306,7 @@ public class BoardControllerImpl  implements BoardController{
 		if(imageFileList != null && imageFileList.size() !=0) {
 		  for(ImageVO  imageVO:imageFileList) {
 		  	imageFileName = imageVO.getImageFileName();
-			File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
+			File srcFile = new File(ARTICLE_IMAGE_REPO + "/" + "temp" + "/" + imageFileName); // 윈도우 경로
 		 	srcFile.delete();
 		  }
 		}
@@ -331,7 +332,7 @@ public class BoardControllerImpl  implements BoardController{
 			MultipartFile mFile = multipartRequest.getFile(fileName);
 			String originalFileName = mFile.getOriginalFilename();
 			fileList.add(originalFileName); // 첨부한 이미지 파일의 이름들을 차례대로 저장
-			File file = new File(ARTICLE_IMAGE_REPO + "\\" + fileName);
+			File file = new File(ARTICLE_IMAGE_REPO + "/" + fileName); // 윈도우 경로
 			
 			if(mFile.getSize() !=0) { //File Null Check
 				if(! file.exists() ) { //경로상에 파일이 존재하지 않을 경우
@@ -339,7 +340,7 @@ public class BoardControllerImpl  implements BoardController{
 							file.createNewFile(); //이후 파일 생성
 					}
 				}
-				mFile.transferTo(new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + originalFileName)); //임시로 저장된 multipartFile을 실제 파일로 전송
+				mFile.transferTo(new File(ARTICLE_IMAGE_REPO + "/" + "temp" + "/" + originalFileName)); //임시로 저장된 multipartFile을 실제 파일로 전송 윈도우
 			}
 		}
 		return fileList;
